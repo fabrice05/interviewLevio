@@ -1,0 +1,51 @@
+TechnicalAdvisor
+   id
+   nom
+   email
+   actif
+  
+JobPosition
+  id
+  nom
+  id_parent
+
+Skill
+  id
+  idTechnicalAdvisor
+  idJobPosition
+  idLevelOfExpertise
+  
+LineOfBusiness
+  id
+  nom
+
+SkillApplicant
+  id
+  idApplicant
+  idJobPosition
+  idLevelOfExpertise
+  
+Applicant
+  id
+  nom
+  email
+  
+LevelOfExpertise
+  id
+  level
+  
+SkillInterview
+  id
+  description
+  dateCandidat
+  
+Interview
+  id
+  description
+  urgence
+  interviewType
+  
+Recruiter
+  id
+  nom
+  email

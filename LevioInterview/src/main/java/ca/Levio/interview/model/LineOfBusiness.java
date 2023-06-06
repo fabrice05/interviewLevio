@@ -1,10 +1,10 @@
-package ca.Levio.data.model;
+package ca.Levio.interview.model;
 import jakarta.persistence.*;
  
     
     @Entity
 @Table(name = "technicalAdvisor")
-public class TechnicalAdvisor {
+public class LineOfBusiness {
 
 	private long id;
 	private String name;
@@ -12,11 +12,11 @@ public class TechnicalAdvisor {
 	private String email;
         private boolean actif;
 	
-	public TechnicalAdvisor() {
+	public LineOfBusiness() {
 		
 	}
 	
-	public TechnicalAdvisor(String firstName, String lastName, String emailId) {
+	public LineOfBusiness(String firstName, String lastName, String emailId) {
 		this.name = firstName;
 		this.lastName = lastName;
 		this.email = emailId;

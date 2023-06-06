@@ -1,4 +1,4 @@
-package ca.Levio.data.ds;
+package ca.Levio.interview.model.ds;
 
 public class JobPosition {
     
