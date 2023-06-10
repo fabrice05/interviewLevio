@@ -1,0 +1,48 @@
+package ca.levio.interview.db.entities;
+
+
+import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+@Entity(name = "lineofbusiness")
+public class LineOfBusiness {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    @JdbcTypeCode(SqlTypes.INTEGER)
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 150)
+    private String name;
+
+    @OneToMany(mappedBy = "lineOfBusiness", orphanRemoval = true)
+    private Collection<JobPosition> jobPositions = new ArrayList<>();
+
+    public Collection<JobPosition> getJobPositions() {
+        return jobPositions;
+    }
+
+    public void setJobPositions(Collection<JobPosition> jobPositions) {
+        this.jobPositions = jobPositions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+}
