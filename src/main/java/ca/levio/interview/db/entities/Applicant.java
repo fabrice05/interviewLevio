@@ -32,15 +32,14 @@ public class Applicant {
     @OneToMany(mappedBy = "applicant", orphanRemoval = true)
     private Collection<Interview> interviews = new ArrayList<>();
 
-    @Column(name = "level_of_expertise", length = 50)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private String levelOfExpertise;
+    @Column(name = "level_of_expertise",nullable = false)
+    private LevelOfExpertise levelOfExpertise;
 
-    public String getLevelOfExpertise() {
+    public LevelOfExpertise getLevelOfExpertise() {
         return levelOfExpertise;
     }
 
-    public void setLevelOfExpertise(String levelOfExpertise) {
+    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
         this.levelOfExpertise = levelOfExpertise;
     }
 

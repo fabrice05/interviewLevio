@@ -16,7 +16,7 @@ public class Skill {
     @JdbcTypeCode(SqlTypes.INTEGER)
     private Integer id;
 
-    @Column(name = "levelofexpertise", nullable = false, length = 20)
+    @Column(name = "levelofexpertise", nullable = false)
     private LevelOfExpertise levelOfExpertise;
 
     @ManyToOne
