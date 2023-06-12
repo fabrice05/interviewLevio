@@ -1,6 +1,7 @@
 package ca.levio.interview.db.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -43,6 +44,7 @@ public class Interview {
         this.skillInterviews = skillInterviews;
     }
 
+    @JsonBackReference
     public Applicant getApplicant() {
         return applicant;
     }
@@ -50,7 +52,7 @@ public class Interview {
     public void setApplicant(Applicant applicant) {
         this.applicant = applicant;
     }
-
+    @JsonBackReference
     public Recruiter getRecruiter() {
         return recruiter;
     }

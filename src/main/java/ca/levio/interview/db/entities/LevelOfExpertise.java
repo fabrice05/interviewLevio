@@ -1,6 +1,6 @@
 package ca.levio.interview.db.entities;
 
-enum LevelOfExpertise {
+public enum LevelOfExpertise {
 	 JUNIOR
 	,INTERMEDIATE
     ,SENIOR

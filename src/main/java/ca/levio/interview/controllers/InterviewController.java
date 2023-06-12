@@ -1,6 +1,7 @@
 package ca.levio.interview.controllers;
 
 import ca.levio.interview.db.entities.Interview;
+import ca.levio.interview.dtos.InterviewDto;
 import ca.levio.interview.services.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +15,29 @@ public class InterviewController {
 InterviewService interviewService;
 
     @GetMapping
-    public List<Interview> getAllRecruiters() {
+    public List<Interview> getAllInterviews() {
         return interviewService.getAllInterviews();
     }
 
     @GetMapping("/{id}")
-    public Interview getRecruiterById(@PathVariable int id) {
-        return interviewService.getInterviewById(id);
+    public InterviewDto getInterviewById(@PathVariable int id) {
+        Interview it=interviewService.getInterviewById(id);
+        InterviewDto dto=new InterviewDto();
+      return  dto.convertJPAToDTO(it);
     }
 
     @PostMapping
-    public Interview createRecruiter(@RequestBody Interview interview) {
-        return interviewService.createInterview(interview);
+    public Interview createInterview(@RequestBody InterviewDto interviewDto) {
+        return interviewService.createInterview(interviewDto);
     }
 
     @PutMapping("/{id}")
-    public Interview updateRecruiter(@PathVariable int id, @RequestBody Interview interview) {
-        interview.setId(id);
-        return interviewService.updateInterview(interview);
+    public Interview updateInterview(@PathVariable int id, @RequestBody InterviewDto interviewDto) {
+        return interviewService.updateInterview(interviewDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteRecruiter(@PathVariable int id) {
+    public void deleteInterview(@PathVariable int id) {
         interviewService.deleteInterview(id);
     }
 

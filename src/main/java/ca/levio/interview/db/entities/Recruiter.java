@@ -1,6 +1,7 @@
 package ca.levio.interview.db.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -25,9 +26,11 @@ public class Recruiter {
     @Column(name = "email", length = 100)
     private String email;
 
+
     @OneToMany(mappedBy = "recruiter", orphanRemoval = true)
     private Collection<Interview> interviews = new ArrayList<>();
 
+    @JsonManagedReference
     public Collection<Interview> getInterviews() {
         return interviews;
     }

@@ -1,7 +1,10 @@
 package ca.levio.interview.services;
 
+import ca.levio.interview.db.entities.Applicant;
 import ca.levio.interview.db.entities.Interview;
+import ca.levio.interview.db.entities.Recruiter;
 import ca.levio.interview.db.repositories.InterviewRepository;
+import ca.levio.interview.dtos.InterviewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +23,24 @@ public class InterviewService {
                 .orElseThrow(() -> new RuntimeException("Interview not found"));
     }
 
-    public Interview createInterview(Interview Interview) {
-        return interviewRepository.save(Interview);
+    public Interview createInterview(InterviewDto interviewDto) {
+        return getInterview(interviewDto);
     }
 
-    public Interview updateInterview(Interview interview) {
-        return interviewRepository.save(interview);
+    public Interview updateInterview(InterviewDto interviewDto) {
+        return getInterview(interviewDto);
+    }
+
+    private Interview getInterview(InterviewDto interviewDto) {
+        Interview et=interviewDto.convertDtoToJPA();
+        Applicant ap=new Applicant();
+        ap.setId(interviewDto.getApplicant_id());
+        et.setApplicant(ap);
+
+        Recruiter re=new Recruiter();
+        re.setId(interviewDto.getRecruiter_id());
+        et.setRecruiter(re);
+        return interviewRepository.save(et);
     }
 
     public void deleteInterview(int id) {
