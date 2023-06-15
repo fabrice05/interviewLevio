@@ -1,7 +1,12 @@
 package ca.levio.interview.db.repositories;
 
 import ca.levio.interview.db.entities.Interview;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface InterviewRepository extends JpaRepository<Interview, Integer> {
+import java.util.UUID;
+
+
+public interface InterviewRepository extends JpaRepository<Interview,UUID> {
 }

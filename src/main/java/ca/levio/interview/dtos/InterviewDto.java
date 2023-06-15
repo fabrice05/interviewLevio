@@ -1,28 +1,46 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.Applicant;
-import ca.levio.interview.db.entities.Interview;
-import ca.levio.interview.db.entities.Recruiter;
-import ca.levio.interview.db.entities.SkillInterview;
+import ca.levio.interview.db.entities.LevelOfExpertise;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.UUID;
 
 public class InterviewDto {
-    private Integer id;
+    @NotEmpty
+    private UUID id;
+    @NotNull
     private String description;
+    @NotNull
+    @Column(name = "interviewtype", length = 10) //Interne or Externe
     private String interviewType;
+    @Column(name = "isurgent")
     private Boolean isUrgent;
-    private int recruiter_id;
-    private int applicant_id;
 
-    public Integer getId() {
+    @Column(name = "interview_status", nullable = false, length = 20)
+    private String interviewStatus;
+    //  Candidate Information
+    @Column(name = "candidate_full_name", nullable = false, length = 200)
+    private String CandidateName;
+    @Column(name = "jobposition", length = 100)
+    private String jobPosition;
+
+    @Column(name = "level_of_expertise",nullable = false)
+    private LevelOfExpertise levelOfExpertise;
+
+//  Recruiter Information
+
+    @Column(name = "Recruiter_full_name", nullable = false, length = 150)
+    private String recruiterName;
+    @Column(name = "recruiter_email", length = 100)
+    private String recruiterEmail;
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -50,44 +68,52 @@ public class InterviewDto {
         isUrgent = urgent;
     }
 
-    public int getRecruiter_id() {
-        return recruiter_id;
+    public String getInterviewStatus() {
+        return interviewStatus;
     }
 
-    public void setRecruiter_id(int recruiter_id) {
-        this.recruiter_id = recruiter_id;
+    public void setInterviewStatus(String interviewStatus) {
+        this.interviewStatus = interviewStatus;
     }
 
-    public int getApplicant_id() {
-        return applicant_id;
+    public String getCandidateName() {
+        return CandidateName;
     }
 
-    public void setApplicant_id(int applicant_id) {
-        this.applicant_id = applicant_id;
-    }
-    public Interview convertDtoToJPA(){
-        Interview it=new Interview();
-     it.setId(this.getId());
-     it.setDescription(this.getDescription());
-     it.setInterviewType(this.getInterviewType());
-     it.setUrgent(this.getUrgent());
-     return it;
+    public void setCandidateName(String candidateName) {
+        CandidateName = candidateName;
     }
 
-    public InterviewDto convertJPAToDTO(Interview it){
-        InterviewDto itdto=new InterviewDto();
-        if(it!=null ){
-        itdto.setId(it.getId());
-        itdto.setDescription(it.getDescription());
-        itdto.setInterviewType(it.getInterviewType());
-        itdto.setUrgent(it.getUrgent());
-        if(it.getApplicant()!=null && it.getApplicant().getId()!=null){
-            itdto.setApplicant_id(it.getApplicant().getId());
-        }
-        if(it.getRecruiter()!=null && it.getRecruiter().getId()!=null){
-            itdto.setRecruiter_id(it.getRecruiter().getId());
-        }
-        }
-        return itdto;
+    public String getJobPosition() {
+        return jobPosition;
     }
+
+    public void setJobPosition(String jobPosition) {
+        this.jobPosition = jobPosition;
+    }
+
+    public LevelOfExpertise getLevelOfExpertise() {
+        return levelOfExpertise;
+    }
+
+    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
+        this.levelOfExpertise = levelOfExpertise;
+    }
+
+    public String getRecruiterName() {
+        return recruiterName;
+    }
+
+    public void setRecruiterName(String recruiterName) {
+        this.recruiterName = recruiterName;
+    }
+
+    public String getRecruiterEmail() {
+        return recruiterEmail;
+    }
+
+    public void setRecruiterEmail(String recruiterEmail) {
+        this.recruiterEmail = recruiterEmail;
+    }
+
 }

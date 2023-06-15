@@ -1,49 +1,50 @@
 package ca.levio.interview.services;
 
-import ca.levio.interview.db.entities.Applicant;
+import ca.levio.interview.configs.AutoEntityMapper;
 import ca.levio.interview.db.entities.Interview;
-import ca.levio.interview.db.entities.Recruiter;
 import ca.levio.interview.db.repositories.InterviewRepository;
 import ca.levio.interview.dtos.InterviewDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
-public class InterviewService {
-    @Autowired
-    InterviewRepository interviewRepository;
-    public List<Interview> getAllInterviews() {
-        return interviewRepository.findAll();
+public class InterviewService{
+    InterviewRepository repository;
+    public InterviewService(InterviewRepository repository) {
+        this.repository = repository;
+    }
+    private List<InterviewDto> mapList(List<Interview> source) {
+        return (List<InterviewDto>) source
+                .stream()
+                .map(element -> AutoEntityMapper.MAPPER.mapJPAtoDTO(element))
+                .collect(Collectors.toList());
     }
 
-    public Interview getInterviewById(int id) {
-        return interviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Interview not found"));
+    public List<InterviewDto> getAll() {
+        return mapList(repository.findAll());
     }
 
-    public Interview createInterview(InterviewDto interviewDto) {
-        return getInterview(interviewDto);
+    public  InterviewDto getApplicantById(UUID id) {
+        Interview element_jpa=  repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Entity not found"));
+        return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
     }
 
-    public Interview updateInterview(InterviewDto interviewDto) {
-        return getInterview(interviewDto);
+    public InterviewDto createOrUpdate(InterviewDto element_dto) {
+        Interview element_jpa = (Interview) AutoEntityMapper.MAPPER.mapDTOtoJPA(element_dto);
+        element_jpa= repository.save(element_jpa);
+        return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
+    }
+    public void delete(UUID id) {
+        repository.deleteById(id);
     }
 
-    private Interview getInterview(InterviewDto interviewDto) {
-        Interview et=interviewDto.convertDtoToJPA();
-        Applicant ap=new Applicant();
-        ap.setId(interviewDto.getApplicant_id());
-        et.setApplicant(ap);
-
-        Recruiter re=new Recruiter();
-        re.setId(interviewDto.getRecruiter_id());
-        et.setRecruiter(re);
-        return interviewRepository.save(et);
-    }
-
-    public void deleteInterview(int id) {
-        interviewRepository.deleteById(id);
+    @Override
+    public String toString() {
+        return "InterviewService{" +
+                "repository=" + repository.findAll()+ "}";
     }
 }

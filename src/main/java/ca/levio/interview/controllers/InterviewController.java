@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/interviews")
@@ -15,30 +16,28 @@ public class InterviewController {
 InterviewService interviewService;
 
     @GetMapping
-    public List<Interview> getAllInterviews() {
-        return interviewService.getAllInterviews();
+    public List<InterviewDto> getAllInterviews() {
+        return interviewService.getAll();
     }
 
     @GetMapping("/{id}")
-    public InterviewDto getInterviewById(@PathVariable int id) {
-        Interview it=interviewService.getInterviewById(id);
-        InterviewDto dto=new InterviewDto();
-      return  dto.convertJPAToDTO(it);
+    public InterviewDto getInterviewById(@PathVariable UUID id) {
+        return interviewService.getApplicantById(id);
     }
 
     @PostMapping
-    public Interview createInterview(@RequestBody InterviewDto interviewDto) {
-        return interviewService.createInterview(interviewDto);
+    public InterviewDto createInterview(@RequestBody InterviewDto interviewDto) {
+        return interviewService.createOrUpdate(interviewDto);
     }
 
     @PutMapping("/{id}")
-    public Interview updateInterview(@PathVariable int id, @RequestBody InterviewDto interviewDto) {
-        return interviewService.updateInterview(interviewDto);
+    public InterviewDto updateInterview(@PathVariable UUID id, @RequestBody InterviewDto interviewDto) {
+        return interviewService.createOrUpdate(interviewDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteInterview(@PathVariable int id) {
-        interviewService.deleteInterview(id);
+    public void deleteInterview(@PathVariable UUID id) {
+        interviewService.delete(id);
     }
 
 }
