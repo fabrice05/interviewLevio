@@ -1,9 +1,10 @@
-package ca.levio.interview.services;
+package ca.levio.interview.services.Impl;
 
 import ca.levio.interview.configs.AutoEntityMapper;
 import ca.levio.interview.db.entities.Interview;
 import ca.levio.interview.db.repositories.InterviewRepository;
 import ca.levio.interview.dtos.InterviewDto;
+import ca.levio.interview.services.IInterview;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class InterviewService{
+public class InterviewService implements IInterview {
     InterviewRepository repository;
     public InterviewService(InterviewRepository repository) {
         this.repository = repository;

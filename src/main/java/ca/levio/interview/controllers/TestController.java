@@ -1,32 +1,32 @@
 package ca.levio.interview.controllers;
 
-import ca.levio.interview.dtos.NotificationDto;
-import ca.levio.interview.messages.KafkaProducer;
-import ca.levio.interview.services.NotificationService;
+import ca.levio.interview.dtos.NotificationMessagingDto;
+
+import ca.levio.interview.messages.MessageProducer;
+import ca.levio.interview.services.INotificationMail;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
 
-    private  final KafkaProducer kafkaProducer;
-    private NotificationService notificationService;
+    private  final MessageProducer producer;
+    private INotificationMail mail;
 
-    public TestController(KafkaProducer kafkaProducer, NotificationService notificationService) {
-        this.kafkaProducer = kafkaProducer;
-        this.notificationService = notificationService;
+    public TestController(MessageProducer producer, INotificationMail mail) {
+        this.producer = producer;
+        this.mail = mail;
     }
     @PostMapping("/api/publish")
-    public void WriteMessage(@RequestParam("message") String message){
-        this.kafkaProducer.WriteMessage(message);
+    public void writeMessage(@RequestBody NotificationMessagingDto notification){
+        this.producer.writeMessage(notification);
     }
 
     @PostMapping("/api/message")
-    public String sendMessage(@RequestBody NotificationDto notification){
+    public String sendMessage(@RequestBody NotificationMessagingDto notification){
 
-       notificationService.sendEmail(notification.getMessage(),new String[]{"fabrice.ngadjeu@gmail.com"},null,"Ceci est un test de Message");
+        mail.sendEmail(notification.getMessage(),new String[]{"fabrice.ngadjeu@gmail.com"},null,"Ceci est un test de Message");
        return "Processus d'envoie de Message en Cours...";
     }
 }

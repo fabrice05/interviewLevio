@@ -1,14 +1,10 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.LevelOfExpertise;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.UUID;
-
-public class NotificationDto {
+public class NotificationMessagingDto {
     @NotEmpty
     private String message;
     @NotNull
@@ -47,5 +43,15 @@ public class NotificationDto {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    @Override
+    public String toString() {
+        return "NotificationMessagingDto{" +
+                "message='" + message + '\'' +
+                ", destinataire='" + destinataire + '\'' +
+                ", copy='" + copy + '\'' +
+                ", subject='" + subject + '\'' +
+                '}';
     }
 }

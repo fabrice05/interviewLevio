@@ -1,9 +1,7 @@
 package ca.levio.interview.controllers;
 
-import ca.levio.interview.db.entities.Interview;
 import ca.levio.interview.dtos.InterviewDto;
-import ca.levio.interview.services.InterviewService;
-import org.springframework.beans.factory.annotation.Autowired;
+import ca.levio.interview.services.IInterview;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,32 +10,35 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/interviews")
 public class InterviewController {
-@Autowired
-InterviewService interviewService;
+private final IInterview interview;
+
+    public InterviewController(IInterview interviewService) {
+        this.interview = interviewService;
+    }
 
     @GetMapping
     public List<InterviewDto> getAllInterviews() {
-        return interviewService.getAll();
+        return interview.getAll();
     }
 
     @GetMapping("/{id}")
     public InterviewDto getInterviewById(@PathVariable UUID id) {
-        return interviewService.getApplicantById(id);
+        return interview.getApplicantById(id);
     }
 
     @PostMapping
     public InterviewDto createInterview(@RequestBody InterviewDto interviewDto) {
-        return interviewService.createOrUpdate(interviewDto);
+        return interview.createOrUpdate(interviewDto);
     }
 
     @PutMapping("/{id}")
     public InterviewDto updateInterview(@PathVariable UUID id, @RequestBody InterviewDto interviewDto) {
-        return interviewService.createOrUpdate(interviewDto);
+        return interview.createOrUpdate(interviewDto);
     }
 
     @DeleteMapping("/{id}")
     public void deleteInterview(@PathVariable UUID id) {
-        interviewService.delete(id);
+        interview.delete(id);
     }
 
 }
