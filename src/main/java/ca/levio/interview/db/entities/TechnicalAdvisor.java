@@ -16,6 +16,8 @@ public class TechnicalAdvisor {
     @Column(name = "id", nullable = false)
     private UUID id;
 
+    @Column(name = "levelofexpertise", nullable = false)
+    private LevelOfExpertise levelOfExpertise;
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 

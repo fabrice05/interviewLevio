@@ -17,7 +17,6 @@ public class Interview {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 

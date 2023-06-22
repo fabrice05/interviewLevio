@@ -16,8 +16,6 @@ public class Skill {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "levelofexpertise", nullable = false)
-    private LevelOfExpertise levelOfExpertise;
 
     @ManyToOne
     @JoinColumn(name = "job_position_id")

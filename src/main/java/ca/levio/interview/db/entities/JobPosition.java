@@ -16,7 +16,7 @@ public class JobPosition {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "name", nullable = false, length = 150)
+    @Column(name = "name", nullable = false, length = 150, unique = true)
     private String name;
 
     @ManyToOne(optional = false)

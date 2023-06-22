@@ -26,16 +26,11 @@ public class SkillInterview {
     private Interview interview;
 
     @ManyToOne
-    @JoinColumn(name = "skill_id")
-    private Skill skill;
-
-    public Skill getSkill() {
-        return skill;
-    }
-
-    public void setSkill(Skill skill) {
-        this.skill = skill;
-    }
+    @JoinColumn(name = "job_position_id")
+    private JobPosition jobPosition;
+    @ManyToOne
+    @JoinColumn(name = "technical_advisor_id")
+    private TechnicalAdvisor technicalAdvisor;
 
     public Interview getInterview() {
         return interview;
