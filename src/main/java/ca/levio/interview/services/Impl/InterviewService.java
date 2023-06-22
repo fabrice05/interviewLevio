@@ -35,7 +35,7 @@ public class InterviewService implements IInterview {
     }
 
     public InterviewDto createOrUpdate(InterviewDto element_dto) {
-        Interview element_jpa = (Interview) AutoEntityMapper.MAPPER.mapDTOtoJPA(element_dto);
+        Interview element_jpa = AutoEntityMapper.MAPPER.mapDTOtoJPA(element_dto);
         element_jpa= repository.save(element_jpa);
         return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
     }

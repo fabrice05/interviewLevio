@@ -7,14 +7,14 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity(name = "jobposition")
 public class JobPosition {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.INTEGER)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "name", nullable = false, length = 150)
     private String name;
@@ -62,12 +62,11 @@ public class JobPosition {
         this.name = name;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
-
 }

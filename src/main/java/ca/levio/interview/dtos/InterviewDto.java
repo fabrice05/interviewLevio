@@ -8,15 +8,14 @@ import jakarta.validation.constraints.*;
 import java.util.UUID;
 
 public class InterviewDto {
-    @NotEmpty
     private UUID id;
     @NotNull
     private String description;
     @NotNull
     @Column(name = "interviewtype", length = 10) //Interne or Externe
     private String interviewType;
-    @Column(name = "isurgent")
-    private Boolean isUrgent;
+    @Column(name = "urgent")
+    private Boolean urgent;
 
     @Column(name = "interview_status", nullable = false, length = 20)
     private String interviewStatus;
@@ -61,11 +60,11 @@ public class InterviewDto {
     }
 
     public Boolean getUrgent() {
-        return isUrgent;
+        return urgent;
     }
 
     public void setUrgent(Boolean urgent) {
-        isUrgent = urgent;
+        this.urgent = urgent;
     }
 
     public String getInterviewStatus() {
@@ -116,4 +115,19 @@ public class InterviewDto {
         this.recruiterEmail = recruiterEmail;
     }
 
+    @Override
+    public String toString() {
+        return "InterviewDto{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", interviewType='" + interviewType + '\'' +
+                ", Urgent=" + urgent +
+                ", interviewStatus='" + interviewStatus + '\'' +
+                ", CandidateName='" + CandidateName + '\'' +
+                ", jobPosition='" + jobPosition + '\'' +
+                ", levelOfExpertise=" + levelOfExpertise +
+                ", recruiterName='" + recruiterName + '\'' +
+                ", recruiterEmail='" + recruiterEmail + '\'' +
+                '}';
+    }
 }

@@ -7,14 +7,14 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity(name = "skill")
 public class Skill {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.INTEGER)
-    private Integer id;
+    private UUID id;
 
     @Column(name = "levelofexpertise", nullable = false)
     private LevelOfExpertise levelOfExpertise;
@@ -22,7 +22,6 @@ public class Skill {
     @ManyToOne
     @JoinColumn(name = "job_position_id")
     private JobPosition jobPosition;
-
     @ManyToOne
     @JoinColumn(name = "technical_advisor_id")
     private TechnicalAdvisor technicalAdvisor;
@@ -62,10 +61,11 @@ public class Skill {
         this.levelOfExpertise = levelOfExpertise;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Integer id) {
+
+    public void setId(UUID id) {
         this.id = id;
     }
 }

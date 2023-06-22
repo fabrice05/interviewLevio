@@ -23,15 +23,15 @@ public class Interview {
 
     @Column(name = "interviewtype", length = 10) //Interne or Externe
     private String interviewType;
-    @Column(name = "isurgent")
-    private Boolean isUrgent;
+    @Column(name = "urgent")
+    private Boolean urgent;
 
     @Column(name = "interview_status", nullable = false, length = 20)
     private String interviewStatus;
 
 //  Candidate Information
     @Column(name = "candidate_full_name", nullable = false, length = 200)
-    private String CandidateName;
+    private String candidateName;
     @Column(name = "jobposition", length = 100)
     private String jobPosition;
 
@@ -74,11 +74,11 @@ public class Interview {
     }
 
     public Boolean getUrgent() {
-        return isUrgent;
+        return urgent;
     }
 
     public void setUrgent(Boolean urgent) {
-        isUrgent = urgent;
+        this.urgent = urgent;
     }
 
     public UUID getId() {
@@ -98,11 +98,11 @@ public class Interview {
     }
 
     public String getCandidateName() {
-        return CandidateName;
+        return candidateName;
     }
 
     public void setCandidateName(String candidateName) {
-        CandidateName = candidateName;
+        this.candidateName = candidateName;
     }
 
     public String getJobPosition() {
@@ -136,4 +136,22 @@ public class Interview {
     public void setRecruiterEmail(String recruiterEmail) {
         this.recruiterEmail = recruiterEmail;
     }
+
+    @Override
+    public String toString() {
+        return "Interview{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", interviewType='" + interviewType + '\'' +
+                ", isUrgent=" + urgent +
+                ", interviewStatus='" + interviewStatus + '\'' +
+                ", CandidateName='" + candidateName + '\'' +
+                ", jobPosition='" + jobPosition + '\'' +
+                ", levelOfExpertise=" + levelOfExpertise +
+                ", recruiterName='" + recruiterName + '\'' +
+                ", recruiterEmail='" + recruiterEmail + '\'' +
+                ", skillInterviews=" + skillInterviews +
+                '}';
+    }
 }
+

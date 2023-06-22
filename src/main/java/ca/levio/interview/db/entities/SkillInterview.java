@@ -6,14 +6,14 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
+import java.util.UUID;
 
 @Entity(name = "skill_interview")
 public class SkillInterview {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    @JdbcTypeCode(SqlTypes.INTEGER)
-    private Integer id;
+    private UUID id;
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
@@ -53,11 +53,11 @@ public class SkillInterview {
         this.dateOfDemande = dateOfDemande;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
