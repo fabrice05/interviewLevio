@@ -13,9 +13,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class InterviewService implements IInterview {
-    InterviewRepository repository;
-    public InterviewService(InterviewRepository repository) {
+    private final InterviewRepository repository;
+    private final TechnicalAdvisorCheking technical;
+
+    public InterviewService(InterviewRepository repository, TechnicalAdvisorCheking technical) {
         this.repository = repository;
+        this.technical = technical;
     }
     private List<InterviewDto> mapList(List<Interview> source) {
         return (List<InterviewDto>) source
@@ -37,6 +40,7 @@ public class InterviewService implements IInterview {
     public InterviewDto createOrUpdate(InterviewDto element_dto) {
         Interview element_jpa = AutoEntityMapper.MAPPER.mapDTOtoJPA(element_dto);
         element_jpa= repository.save(element_jpa);
+        technical.createTechnicalChoise(element_jpa);
         return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
     }
     public void delete(UUID id) {
@@ -48,4 +52,6 @@ public class InterviewService implements IInterview {
         return "InterviewService{" +
                 "repository=" + repository.findAll()+ "}";
     }
+
+
 }

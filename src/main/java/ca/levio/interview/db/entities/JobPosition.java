@@ -16,8 +16,11 @@ public class JobPosition {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "name", nullable = false, length = 150, unique = true)
+    @Column(name = "name", nullable = false, length = 150)
     private String name;
+
+    @OneToMany(mappedBy = "jobPosition", orphanRemoval = true)
+    private Collection<TechnicalAdvisor> technicalAdvisors = new ArrayList<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "line_of_business_id", nullable = false)
@@ -28,13 +31,16 @@ public class JobPosition {
     private JobPosition jobPosition;
 
     @OneToMany(mappedBy = "jobPosition", orphanRemoval = true)
-    private Collection<Skill> skills = new ArrayList<>();
+    private Collection<SkillInterview> skills = new ArrayList<>();
 
-    public Collection<Skill> getSkills() {
+    public JobPosition(UUID jobPositionId) {
+    }
+
+    public Collection<SkillInterview> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(Collection<SkillInterview> skills) {
         this.skills = skills;
     }
 
@@ -66,7 +72,18 @@ public class JobPosition {
         return id;
     }
 
+    public Collection<TechnicalAdvisor> getTechnicalAdvisors() {
+        return technicalAdvisors;
+    }
+
+    public void setTechnicalAdvisors(Collection<TechnicalAdvisor> technicalAdvisors) {
+        this.technicalAdvisors = technicalAdvisors;
+    }
+
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public JobPosition() {
     }
 }

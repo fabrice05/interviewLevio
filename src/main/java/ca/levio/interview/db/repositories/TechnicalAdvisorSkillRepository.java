@@ -12,4 +12,5 @@ import java.util.UUID;
 
 public interface TechnicalAdvisorSkillRepository extends JpaRepository<TechnicalAdvisorAndSkill,UUID> {
     List<TechnicalAdvisorAndSkill>  findByJobNameAndLevelOfExpertiseGreaterThan(String job_Name, LevelOfExpertise level);
+    List<TechnicalAdvisorAndSkill>  findByjobPositionId(UUID id);
 }

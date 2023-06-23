@@ -12,42 +12,29 @@ values
     ('dacfbaaf-874c-46ff-a878-9a0329c048d5','Progiciel de gestion'),
     ('e3d2d587-eaa9-4e8a-b87d-aa5f7d95a0a2','Données massives, intelligence artificielle et d''affaires');
 
-insert into technicaladvisor (id, name, email, actif)
-values ('28716beb-26f6-4309-ac20-e3d203a8e2d9', 'Sanders Mullin', 'smullin0@cnbc.com', false),
-('8acb95b5-0a81-4335-ae67-2846848ccecf', 'Roberta Larrad', 'rlarrad1@harvard.edu', true),
-('54008c41-ff17-467c-8d40-a17ef3092a48', 'Arlene Chaperling', 'achaperling2@whitehouse.gov', true),
-('6c02f1a0-baec-4e69-bc9c-832c81917d5b', 'Hubie Casswell', 'hcasswell3@deviantart.com', true),
-('4023297f-eaac-4b73-8545-078377fb0841', 'Katlin Huish', 'khuish4@ameblo.jp', false),
-('7e81be69-3cba-416f-95bd-e45a513d4b8a', 'Gray Fritter', 'gfritter5@oaic.gov.au', true),
-('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'wcollington6@webs.com', true),
-('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'aastin7@domainmarket.com', true),
-('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'awhetnall8@unc.edu', true),
-('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'gkrol9@dropbox.com', true);
-
 insert into jobposition (id, name, line_of_business_id, job_parent_id) values
-('dc47e297-9f11-424a-bafb-6758b433bb19', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+ ('dc47e297-9f11-424a-bafb-6758b433bb19', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
 ('4fa2d5a2-2539-44ad-90b8-8605583fc640', 'Lead Dev Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', 'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
 ('cfe3bd32-0643-4fb9-8288-cfcee496afba', 'Architecte Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', null),
-('f0af2952-1d36-4964-b9ae-bcd2962ec60a', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
-('ecf83b0c-8827-4f1c-852a-84fce7c592c3', 'Lead Dev Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', 'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
-('81b10abd-09ab-4e4a-8fc8-9e402a624494', 'Administrateur Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', '083c47cb-add2-45ba-83ca-4e50b3540f49'),
-('083c47cb-add2-45ba-83ca-4e50b3540f49', 'Lead Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', 'ea3cf8c4-865d-44cf-aa38-241a86e109aa'),
-('ea3cf8c4-865d-44cf-aa38-241a86e109aa', 'Architecte Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a',null),
-('22b9b84e-4810-49ed-824f-e4c052ef4859', 'Analyste Sécurité', 'ea8dbf2f-e943-4024-b73d-b74581f4e611', '003cb935-d8d0-4a28-8fae-747da8dea688'),
-('003cb935-d8d0-4a28-8fae-747da8dea688', 'Lead Analyst Sécurité', 'ea8dbf2f-e943-4024-b73d-b74581f4e611', null);
+ ('f0af2952-1d36-4964-b9ae-bcd2962ec60a', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+ ('ecf83b0c-8827-4f1c-852a-84fce7c592c3', 'Lead Dev Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', 'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+ ('81b10abd-09ab-4e4a-8fc8-9e402a624494', 'Administrateur Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', '083c47cb-add2-45ba-83ca-4e50b3540f49'),
+ ('083c47cb-add2-45ba-83ca-4e50b3540f49', 'Lead Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', 'ea3cf8c4-865d-44cf-aa38-241a86e109aa'),
+ ('ea3cf8c4-865d-44cf-aa38-241a86e109aa', 'Architecte Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a',null),
+ ('22b9b84e-4810-49ed-824f-e4c052ef4859', 'Analyste Sécurité', 'ea8dbf2f-e943-4024-b73d-b74581f4e611', '003cb935-d8d0-4a28-8fae-747da8dea688'),
+ ('003cb935-d8d0-4a28-8fae-747da8dea688', 'Lead Analyst Sécurité', 'ea8dbf2f-e943-4024-b73d-b74581f4e611', null);
 
-insert into skill(id,levelofexpertise,job_position_id,technical_advisor_id)
-values
-('ee05f7c2-eced-46e0-b509-8c08f3da6495',0, 'cfe3bd32-0643-4fb9-8288-cfcee496afba'  ,'28716beb-26f6-4309-ac20-e3d203a8e2d9'),
-('6849fa51-d4bc-44bb-87fe-0ee4804cb753',1, '4fa2d5a2-2539-44ad-90b8-8605583fc640'  ,'8acb95b5-0a81-4335-ae67-2846848ccecf'),
-('5e12fba2-a982-4d06-8687-7bc590fe4ede',2,'dc47e297-9f11-424a-bafb-6758b433bb19','54008c41-ff17-467c-8d40-a17ef3092a48'    ),
-('301641ca-f5ab-40ef-b969-be1a78e42948',0, '22b9b84e-4810-49ed-824f-e4c052ef4859'   ,'6c02f1a0-baec-4e69-bc9c-832c81917d5b'),
-('620671fc-b756-4d65-9bd3-37e1e7fa5211',1, '003cb935-d8d0-4a28-8fae-747da8dea688'   ,'4023297f-eaac-4b73-8545-078377fb0841'),
-('8a2a41ce-8b85-4d3f-b4eb-89d5a60609d1',2,'ea3cf8c4-865d-44cf-aa38-241a86e109aa' ,'7e81be69-3cba-416f-95bd-e45a513d4b8a'   ),
-('3445c4b3-abbb-4402-b6c6-4979fe557ceb',0,'083c47cb-add2-45ba-83ca-4e50b3540f49'   ,'db00e2de-e5f8-4c7e-9488-c99fd075f028' ),
-('12379586-b545-4356-a5f7-d1469e58b1c7',3, '81b10abd-09ab-4e4a-8fc8-9e402a624494'  ,'5769e27f-e682-4dc5-a792-ef3c2f1b5aeb' ),
-('96455c43-c692-49c6-81c7-f7af59b06edd',3, 'ecf83b0c-8827-4f1c-852a-84fce7c592c3'  ,'0173812a-a2b3-4dda-96b8-37f84fdc4c67' ),
-('cf5d62b8-1e07-4676-8b4a-a40d6eeb1450',4, 'f0af2952-1d36-4964-b9ae-bcd2962ec60a', '62d2195d-41b5-46fd-98df-763c96378c38'  );
+insert into technicaladvisor (id, name, email, actif,levelofexpertise,job_position_id)
+values ('28716beb-26f6-4309-ac20-e3d203a8e2d9', 'Sanders Mullin', 'smullin0@cnbc.com', false,0,'dc47e297-9f11-424a-bafb-6758b433bb19'),
+('8acb95b5-0a81-4335-ae67-2846848ccecf', 'Roberta Larrad', 'rlarrad1@harvard.edu', true,1,'dc47e297-9f11-424a-bafb-6758b433bb19'),
+('54008c41-ff17-467c-8d40-a17ef3092a48', 'Arlene Chaperling', 'achaperling2@whitehouse.gov', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('6c02f1a0-baec-4e69-bc9c-832c81917d5b', 'Hubie Casswell', 'hcasswell3@deviantart.com', true,3,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('4023297f-eaac-4b73-8545-078377fb0841', 'Katlin Huish', 'khuish4@ameblo.jp', false,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('7e81be69-3cba-416f-95bd-e45a513d4b8a', 'Gray Fritter', 'gfritter5@oaic.gov.au', true,0,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'wcollington6@webs.com', true,1,'f0af2952-1d36-4964-b9ae-bcd2962ec60a'),
+('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'aastin7@domainmarket.com', true,2,'f0af2952-1d36-4964-b9ae-bcd2962ec60a'),
+('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'awhetnall8@unc.edu', true,3,'ecf83b0c-8827-4f1c-852a-84fce7c592c3'),
+('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'gkrol9@dropbox.com', true,4,'ecf83b0c-8827-4f1c-852a-84fce7c592c3');
 
 
 
@@ -155,7 +142,7 @@ insert into interview (id, description, interviewtype, urgent, interview_status,
                                                                                                                                                                                     ,('20cac14f-4434-402a-af31-22c401bfa312', 'Ulcerative colitis, unspecified with intestinal obstruction', 'Externe', true, 'OPEN', 'Evered Grimble', 'Architecte Système', '4', 'Layney Bruinsma', 'lbruinsma2r@nhs.uk');
 
 Create VIEW technical_advisor_skill AS
-select s.id id_skill, s.levelofexpertise levelofexpertiseskill ,
-       s.job_position_id,s.technical_advisor_id,job.name job_name, job.line_of_business_id,
+select tec.levelofexpertise levelofexpertiseskill ,
+       tec.job_position_id,tec.id technical_advisor_id,job.name job_name, job.line_of_business_id,
        job.job_parent_id, tec.name technicaladvisorname, tec.email technicaladvisoremail, tec.actif technicaladvisoractif
-From Skill s  inner join jobposition job ON s.job_position_id=job.id inner join technicaladvisor tec ON s.technical_advisor_id=tec.id;
+From jobposition job inner join technicaladvisor tec ON job.id=tec.job_position_id;

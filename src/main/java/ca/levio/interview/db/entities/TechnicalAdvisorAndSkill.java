@@ -11,13 +11,12 @@ import java.util.UUID;
 @Immutable
 @Subselect("select * from technical_advisor_skill")
 public class TechnicalAdvisorAndSkill {
-    @Id
-    @Column(name = "id_skill", nullable = false)
-    private UUID idSkill;
+
     @Column(name = "levelofexpertiseskill", nullable = false)
     private LevelOfExpertise levelOfExpertise;
     @Column(name = "job_position_id", nullable = false)
     private UUID jobPositionId;
+    @Id
     @Column(name = "technical_advisor_id", nullable = false)
     private UUID technicalAdvisorId;
     @Column(name = "line_of_business_id", nullable = false)
@@ -35,15 +34,6 @@ public class TechnicalAdvisorAndSkill {
 
     @Column(name = "technicaladvisoremail", length = 100)
     private String technicalAdvisorEmail;
-
-    public UUID getIdSkill() {
-        return idSkill;
-    }
-
-    public void setIdSkill(UUID idSkill) {
-        this.idSkill = idSkill;
-    }
-
     public LevelOfExpertise getLevelOfExpertise() {
         return levelOfExpertise;
     }
@@ -51,17 +41,6 @@ public class TechnicalAdvisorAndSkill {
     public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
         this.levelOfExpertise = levelOfExpertise;
     }
-
-    public UUID getJob_position_id() {
-        return jobPositionId;
-    }
-
-    public void setJob_position_id(UUID job_position_id) {
-        this.jobPositionId = job_position_id;
-    }
-
-
-
     public String getJobName() {
         return jobName;
     }
@@ -131,7 +110,6 @@ public class TechnicalAdvisorAndSkill {
     @Override
     public String toString() {
         return "TechnicalAdvisorAndSkill{" +
-                "idSkill=" + idSkill +
                 ", levelOfExpertise=" + levelOfExpertise +
                 ", jobPositionId=" + jobPositionId +
                 ", technicalAdvisorId=" + technicalAdvisorId +

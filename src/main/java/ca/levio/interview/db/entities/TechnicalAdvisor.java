@@ -27,14 +27,17 @@ public class TechnicalAdvisor {
     @Column(name = "email", length = 100)
     private String email;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "job_position_id", nullable = false)
+    private JobPosition jobPosition;
     @OneToMany(mappedBy = "technicalAdvisor", orphanRemoval = true)
-    private Collection<Skill> skills = new ArrayList<>();
+    private Collection<SkillInterview> skills = new ArrayList<>();
 
-    public Collection<Skill> getSkills() {
+    public Collection<SkillInterview> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<Skill> skills) {
+    public void setSkills(Collection<SkillInterview> skills) {
         this.skills = skills;
     }
 
@@ -64,6 +67,22 @@ public class TechnicalAdvisor {
 
     public UUID getId() {
         return id;
+    }
+
+    public LevelOfExpertise getLevelOfExpertise() {
+        return levelOfExpertise;
+    }
+
+    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
+        this.levelOfExpertise = levelOfExpertise;
+    }
+
+    public JobPosition getJobPosition() {
+        return jobPosition;
+    }
+
+    public void setJobPosition(JobPosition jobPosition) {
+        this.jobPosition = jobPosition;
     }
 
     public void setId(UUID id) {

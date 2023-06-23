@@ -47,7 +47,7 @@ public class TestController {
 
     @GetMapping("/api/same")
     public String TechnicalSame(){
-        for (TechnicalAdvisorAndSkill technicalAdvisorAndSkill : checking.getSameTechnicalWithHigthLevel("Développeur Java",LevelOfExpertise.SENIOR)) {
+        for (TechnicalAdvisorAndSkill technicalAdvisorAndSkill : checking.getSameTechnicalWithHigthLevel("Développeur Java",LevelOfExpertise.JUNIOR)) {
             System.out.println(technicalAdvisorAndSkill);
         }
 

@@ -2,7 +2,9 @@ package ca.levio.interview.db.entities;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
@@ -14,12 +16,15 @@ public class SkillInterview {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
-    @Column(name = "description", nullable = false, length = 250)
-    private String description;
-
-    @Column(name = "date_of_demand")
+    @Column(name = "status", nullable = false, length = 250)
+    private String status;
+    @CreationTimestamp
     @JdbcTypeCode(SqlTypes.DATE)
-    private Date dateOfDemande;
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @JdbcTypeCode(SqlTypes.DATE)
+    private Date updatedAt;
 
     @ManyToOne
     @JoinColumn(name = "interview_id")
@@ -31,7 +36,8 @@ public class SkillInterview {
     @ManyToOne
     @JoinColumn(name = "technical_advisor_id")
     private TechnicalAdvisor technicalAdvisor;
-
+    @Column(name = "technical_preselectionne", nullable = true)
+    private UUID firstChoiceTechnical;
     public Interview getInterview() {
         return interview;
     }
@@ -40,12 +46,20 @@ public class SkillInterview {
         this.interview = interview;
     }
 
-    public Date getDateOfDemande() {
-        return dateOfDemande;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDateOfDemande(Date dateOfDemande) {
-        this.dateOfDemande = dateOfDemande;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public UUID getId() {
@@ -56,12 +70,44 @@ public class SkillInterview {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public JobPosition getJobPosition() {
+        return jobPosition;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setJobPosition(JobPosition jobPosition) {
+        this.jobPosition = jobPosition;
     }
 
+    public TechnicalAdvisor getTechnicalAdvisor() {
+        return technicalAdvisor;
+    }
+
+    public void setTechnicalAdvisor(TechnicalAdvisor technicalAdvisor) {
+        this.technicalAdvisor = technicalAdvisor;
+    }
+
+    public SkillInterview() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public UUID getFirstChoiceTechnical() {
+        return firstChoiceTechnical;
+    }
+
+    public void setFirstChoiceTechnical(UUID firstChoiceTechnical) {
+        this.firstChoiceTechnical = firstChoiceTechnical;
+    }
+
+    public SkillInterview(String status, Interview interview, JobPosition jobPosition) {
+        this.status = status;
+        this.interview = interview;
+        this.jobPosition = jobPosition;
+    }
 }
