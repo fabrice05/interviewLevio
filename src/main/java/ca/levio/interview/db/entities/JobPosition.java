@@ -28,6 +28,8 @@ public class JobPosition {
 
     @ManyToOne
     @JoinColumn(name = "job_parent_id")
+    //Todo : penses-tu vraiment qu'il soit cohérent d'appeler cet attribut JobPosition
+    //Quand je manipule l'objet, comment je peux savoir que ca représente le parent ?
     private JobPosition jobPosition;
 
     @OneToMany(mappedBy = "jobPosition", orphanRemoval = true)

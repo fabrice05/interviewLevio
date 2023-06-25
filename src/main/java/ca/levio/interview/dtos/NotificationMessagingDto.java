@@ -8,6 +8,7 @@ public class NotificationMessagingDto {
     @NotEmpty
     private String message;
     @NotNull
+    //Todo : mélange francais anglais
     private String destinataire;
     private String copy;
     @NotNull

@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper
+//Todo : pourquoi dans un package qui s'appelle config ?
+//Je ne comprends pas le nom de cette interface
+//Pourquoi tes méthodes portent le nom Jpa et non pas simplement Entity par exemple ?
 public interface AutoEntityMapper {
     AutoEntityMapper MAPPER = Mappers.getMapper(AutoEntityMapper.class);
    Interview mapDTOtoJPA(InterviewDto dto);

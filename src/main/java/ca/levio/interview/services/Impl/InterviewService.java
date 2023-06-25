@@ -21,6 +21,7 @@ public class InterviewService implements IInterview {
         this.technical = technical;
     }
     private List<InterviewDto> mapList(List<Interview> source) {
+        //Todo : pourquoi tu rajoutes un cast explicite ??
         return (List<InterviewDto>) source
                 .stream()
                 .map(element -> AutoEntityMapper.MAPPER.mapJPAtoDTO(element))
@@ -31,16 +32,20 @@ public class InterviewService implements IInterview {
         return mapList(repository.findAll());
     }
 
+    //Todo : nommage ????
     public  InterviewDto getApplicantById(UUID id) {
         Interview element_jpa=  repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entity not found"));
+        //Todo : pourquoi ce cast ?
         return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
     }
 
     public InterviewDto createOrUpdate(InterviewDto element_dto) {
         Interview element_jpa = AutoEntityMapper.MAPPER.mapDTOtoJPA(element_dto);
         element_jpa= repository.save(element_jpa);
+        //Todo : tu fais ca en synchrone ? on a convenu de passer par Kafka pour cette partie
         technical.createTechnicalChoise(element_jpa);
+        //Todo : pourquoi ce cast ?
         return (InterviewDto) AutoEntityMapper.MAPPER.mapJPAtoDTO(element_jpa);
     }
     public void delete(UUID id) {

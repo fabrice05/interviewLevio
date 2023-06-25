@@ -21,15 +21,21 @@ public class TechnicalAdvisorCheking {
     }
     private Set<TechnicalAdvisorAndSkill> getListTechnicalAdvisor(String name, LevelOfExpertise level) {
         //List of Job position by the current Title Job of candidate
+        //Todo : passer par les noms est très dangereux (faute de frappe, ...) on avait évoqué le fait d'utiliser la clé du job plutot que son nom)
+        //En plus je ne comprends pas, à partir du nom tu dois en trouver un seul, alors pourquoi une liste ???
         List<JobPosition> listOfActualJobPosition =jobPositionRepository.findByName(name);
+        //Todo : pourquoi un set ?
         Set<TechnicalAdvisorAndSkill> setOfTechnicalAdvisor=new HashSet<>();
 
         listOfActualJobPosition.forEach(actualJobPositionSon->{
             JobPosition actualJobPositionParent = actualJobPositionSon.getJobPosition();
+            //Todo : comment l'id pourrait etre null ?
             while (actualJobPositionParent!=null && actualJobPositionParent.getId()!=null){
+                //Todo : tu ajoutes une list dans un set, il va se passser quoi à ton avis ? As-tu testé ?
                 setOfTechnicalAdvisor.addAll(repository.findByjobPositionId(actualJobPositionParent.getId()));
                 actualJobPositionParent = actualJobPositionParent.getJobPosition();
             }
+            //Todo : tu ajoutes une list dans un set, il va se passser quoi à ton avis ? As-tu testé ?
             setOfTechnicalAdvisor.addAll(repository.findByJobNameAndLevelOfExpertiseGreaterThan(actualJobPositionSon.getName(),level));
         });
         return setOfTechnicalAdvisor;
@@ -43,6 +49,7 @@ public class TechnicalAdvisorCheking {
     }
 
 
+    //Todo : elementJpa te semble etre un bon nom de variable ?
     public void createTechnicalChoise(Interview elementJpa) {
         Set<TechnicalAdvisorAndSkill> setTechnical=getListTechnicalAdvisor(elementJpa.getJobPosition(),elementJpa.getLevelOfExpertise());
       setTechnical.forEach(tech->
