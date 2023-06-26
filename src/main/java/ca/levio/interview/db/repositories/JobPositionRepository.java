@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface JobPositionRepository extends JpaRepository<JobPosition, UUID> {
-    List<JobPosition> findByName(String name);
+    JobPosition findByName(String name);
 }

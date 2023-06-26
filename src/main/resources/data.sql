@@ -16,8 +16,6 @@ insert into jobposition (id, name, line_of_business_id, job_parent_id) values
  ('dc47e297-9f11-424a-bafb-6758b433bb19', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
 ('4fa2d5a2-2539-44ad-90b8-8605583fc640', 'Lead Dev Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', 'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
 ('cfe3bd32-0643-4fb9-8288-cfcee496afba', 'Architecte Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', null),
- ('f0af2952-1d36-4964-b9ae-bcd2962ec60a', 'Développeur Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', '4fa2d5a2-2539-44ad-90b8-8605583fc640'),
- ('ecf83b0c-8827-4f1c-852a-84fce7c592c3', 'Lead Dev Java', '14be9b1f-2b4a-44d9-b0bf-e12131518a29', 'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
  ('81b10abd-09ab-4e4a-8fc8-9e402a624494', 'Administrateur Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', '083c47cb-add2-45ba-83ca-4e50b3540f49'),
  ('083c47cb-add2-45ba-83ca-4e50b3540f49', 'Lead Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a', 'ea3cf8c4-865d-44cf-aa38-241a86e109aa'),
  ('ea3cf8c4-865d-44cf-aa38-241a86e109aa', 'Architecte Système', 'e73ec186-d491-4f4c-af71-e4756ceb8e7a',null),
@@ -31,10 +29,10 @@ values ('28716beb-26f6-4309-ac20-e3d203a8e2d9', 'Sanders Mullin', 'smullin0@cnbc
 ('6c02f1a0-baec-4e69-bc9c-832c81917d5b', 'Hubie Casswell', 'hcasswell3@deviantart.com', true,3,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
 ('4023297f-eaac-4b73-8545-078377fb0841', 'Katlin Huish', 'khuish4@ameblo.jp', false,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
 ('7e81be69-3cba-416f-95bd-e45a513d4b8a', 'Gray Fritter', 'gfritter5@oaic.gov.au', true,0,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
-('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'wcollington6@webs.com', true,1,'f0af2952-1d36-4964-b9ae-bcd2962ec60a'),
-('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'aastin7@domainmarket.com', true,2,'f0af2952-1d36-4964-b9ae-bcd2962ec60a'),
-('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'awhetnall8@unc.edu', true,3,'ecf83b0c-8827-4f1c-852a-84fce7c592c3'),
-('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'gkrol9@dropbox.com', true,4,'ecf83b0c-8827-4f1c-852a-84fce7c592c3');
+('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'wcollington6@webs.com', true,1,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'aastin7@domainmarket.com', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'awhetnall8@unc.edu', true,3,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'gkrol9@dropbox.com', true,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba');
 
 
 

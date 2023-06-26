@@ -1,13 +1,13 @@
 package ca.levio.interview.services.Impl;
 
-import ca.levio.interview.services.INotificationMail;
+import ca.levio.interview.services.INotificationMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
-public class NotificationService implements INotificationMail {
+public class NotificationService implements INotificationMessage {
     private JavaMailSender javaMailSender;
 
     public NotificationService(JavaMailSender javaMailSender) {

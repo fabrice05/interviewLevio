@@ -1,7 +1,7 @@
 package ca.levio.interview.controllers;
 
 import ca.levio.interview.dtos.InterviewDto;
-import ca.levio.interview.services.IInterview;
+import ca.levio.interview.services.IInterviewProcess;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/interviews")
 public class InterviewController {
-private final IInterview interview;
+private final IInterviewProcess interview;
 
-    public InterviewController(IInterview interviewService) {
+    public InterviewController(IInterviewProcess interviewService) {
         this.interview = interviewService;
     }
 
@@ -23,7 +23,7 @@ private final IInterview interview;
 
     @GetMapping("/{id}")
     public InterviewDto getInterviewById(@PathVariable UUID id) {
-        return interview.getApplicantById(id);
+        return interview.getApplicant(id);
     }
 
     @PostMapping

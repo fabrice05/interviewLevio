@@ -5,7 +5,7 @@ import ca.levio.interview.db.entities.TechnicalAdvisorAndSkill;
 import ca.levio.interview.dtos.NotificationMessagingDto;
 
 import ca.levio.interview.messages.MessageProducer;
-import ca.levio.interview.services.INotificationMail;
+import ca.levio.interview.services.INotificationMessage;
 import ca.levio.interview.services.Impl.TechnicalAdvisorCheking;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +17,9 @@ public class TestController {
 
     private  final MessageProducer producer;
     private  final TechnicalAdvisorCheking checking;
-    private INotificationMail mail;
+    private INotificationMessage mail;
 
-    public TestController(MessageProducer producer, TechnicalAdvisorCheking checking, INotificationMail mail) {
+    public TestController(MessageProducer producer, TechnicalAdvisorCheking checking, INotificationMessage mail) {
         this.producer = producer;
         this.checking = checking;
         this.mail = mail;
@@ -32,7 +32,7 @@ public class TestController {
     @PostMapping("/api/message")
     public String sendMessage(@RequestBody NotificationMessagingDto notification){
 
-        mail.sendEmail(notification.getMessage(),new String[]{"fabrice.ngadjeu@gmail.com"},null,"Ceci est un test de Message");
+        mail.sendEmail(notification.getMessage(),new String("fabrice.ngadjeu@gmail.com"),null,"Ceci est un test de Message");
        return "Processus d'envoie de Message en Cours...";
     }
 
