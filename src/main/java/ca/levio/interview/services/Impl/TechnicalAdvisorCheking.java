@@ -20,7 +20,7 @@ public class TechnicalAdvisorCheking {
         this.repository = repository;
         this.jobPositionRepository = jobPositionRepository;
     }
-    private List<TechnicalAdvisorAndSkill> getListTechnicalAdvisor(Interview interview) {
+    public List<TechnicalAdvisorAndSkill> getListTechnicalAdvisor(Interview interview) {
     //private List<TechnicalAdvisorAndSkill> getListTechnicalAdvisor(String name, LevelOfExpertise level) {
         //List of Job position by the current Title Job of candidate
         JobPosition actualJobPositionSon =jobPositionRepository.findByName(interview.getJobPosition());
@@ -44,12 +44,5 @@ public class TechnicalAdvisorCheking {
     }
 
 
-    public void createTechnicalChoise(Interview interview) {
-        List<TechnicalAdvisorAndSkill> setTechnical=getListTechnicalAdvisor(interview);
-      setTechnical.forEach(tech->
-              {
-                  SkillInterview skillInterview=new SkillInterview("OPEN",
-                          interview,new JobPosition(tech.getJobPositionId()));
-              });
-    }
+
 }

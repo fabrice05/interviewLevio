@@ -88,4 +88,11 @@ public class TechnicalAdvisor {
     public void setId(UUID id) {
         this.id = id;
     }
+
+    public TechnicalAdvisor() {
+    }
+
+    public TechnicalAdvisor(UUID id) {
+        this.id = id;
+    }
 }

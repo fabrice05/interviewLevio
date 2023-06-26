@@ -23,16 +23,16 @@ insert into jobposition (id, name, line_of_business_id, job_parent_id) values
  ('003cb935-d8d0-4a28-8fae-747da8dea688', 'Lead Analyst Sécurité', 'ea8dbf2f-e943-4024-b73d-b74581f4e611', null);
 
 insert into technicaladvisor (id, name, email, actif,levelofexpertise,job_position_id)
-values ('28716beb-26f6-4309-ac20-e3d203a8e2d9', 'Sanders Mullin', 'smullin0@cnbc.com', false,0,'dc47e297-9f11-424a-bafb-6758b433bb19'),
-('8acb95b5-0a81-4335-ae67-2846848ccecf', 'Roberta Larrad', 'rlarrad1@harvard.edu', true,1,'dc47e297-9f11-424a-bafb-6758b433bb19'),
-('54008c41-ff17-467c-8d40-a17ef3092a48', 'Arlene Chaperling', 'achaperling2@whitehouse.gov', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
-('6c02f1a0-baec-4e69-bc9c-832c81917d5b', 'Hubie Casswell', 'hcasswell3@deviantart.com', true,3,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
-('4023297f-eaac-4b73-8545-078377fb0841', 'Katlin Huish', 'khuish4@ameblo.jp', false,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
-('7e81be69-3cba-416f-95bd-e45a513d4b8a', 'Gray Fritter', 'gfritter5@oaic.gov.au', true,0,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
-('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'wcollington6@webs.com', true,1,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
-('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'aastin7@domainmarket.com', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
-('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'awhetnall8@unc.edu', true,3,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
-('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'gkrol9@dropbox.com', true,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba');
+values ('28716beb-26f6-4309-ac20-e3d203a8e2d9', 'Sanders Mullin', 'fabrice.ngadjeu@gmail.com', false,0,'dc47e297-9f11-424a-bafb-6758b433bb19'),
+('8acb95b5-0a81-4335-ae67-2846848ccecf', 'Roberta Larrad', 'fabrice05@yahoo.fr', true,1,'dc47e297-9f11-424a-bafb-6758b433bb19'),
+('54008c41-ff17-467c-8d40-a17ef3092a48', 'Arlene Chaperling', 'fabrice.ngadjeu@levio.ca', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('6c02f1a0-baec-4e69-bc9c-832c81917d5b', 'Hubie Casswell', 'fabrice.ngadjeu@gmail.com', true,3,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('4023297f-eaac-4b73-8545-078377fb0841', 'Katlin Huish', 'fabrice05@yahoo.fr', false,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('7e81be69-3cba-416f-95bd-e45a513d4b8a', 'Gray Fritter', 'fabrice.ngadjeu@levio.ca', true,0,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('db00e2de-e5f8-4c7e-9488-c99fd075f028', 'Weidar Collington', 'fabrice.ngadjeu@gmail.com', true,1,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('5769e27f-e682-4dc5-a792-ef3c2f1b5aeb', 'Anett Astin', 'fabrice05@yahoo.fr', true,2,'4fa2d5a2-2539-44ad-90b8-8605583fc640'),
+('0173812a-a2b3-4dda-96b8-37f84fdc4c67', 'Antin Whetnall', 'fabrice.ngadjeu@levio.ca', true,3,'cfe3bd32-0643-4fb9-8288-cfcee496afba'),
+('62d2195d-41b5-46fd-98df-763c96378c38', 'Godard Krol', 'fabrice.ngadjeu@levio.ca', true,4,'cfe3bd32-0643-4fb9-8288-cfcee496afba');
 
 
 

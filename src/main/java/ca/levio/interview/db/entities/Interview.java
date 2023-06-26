@@ -142,15 +142,22 @@ public class Interview {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", interviewType='" + interviewType + '\'' +
-                ", isUrgent=" + urgent +
+                ", urgent=" + urgent +
                 ", interviewStatus='" + interviewStatus + '\'' +
-                ", CandidateName='" + candidateName + '\'' +
+                ", candidateName='" + candidateName + '\'' +
                 ", jobPosition='" + jobPosition + '\'' +
                 ", levelOfExpertise=" + levelOfExpertise +
                 ", recruiterName='" + recruiterName + '\'' +
                 ", recruiterEmail='" + recruiterEmail + '\'' +
                 ", skillInterviews=" + skillInterviews +
                 '}';
+    }
+
+    public Interview() {
+    }
+
+    public Interview(UUID id) {
+        this.id = id;
     }
 }
 

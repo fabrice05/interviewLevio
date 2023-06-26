@@ -37,7 +37,7 @@ public class SkillInterview {
     @JoinColumn(name = "technical_advisor_id")
     private TechnicalAdvisor technicalAdvisor;
     @Column(name = "technical_preselectionne", nullable = true)
-    private UUID firstChoiceTechnical;
+    private Boolean firstChoiceTechnical;
     public Interview getInterview() {
         return interview;
     }
@@ -97,11 +97,11 @@ public class SkillInterview {
         this.status = status;
     }
 
-    public UUID getFirstChoiceTechnical() {
+    public Boolean getFirstChoiceTechnical() {
         return firstChoiceTechnical;
     }
 
-    public void setFirstChoiceTechnical(UUID firstChoiceTechnical) {
+    public void setFirstChoiceTechnical(Boolean firstChoiceTechnical) {
         this.firstChoiceTechnical = firstChoiceTechnical;
     }
 
