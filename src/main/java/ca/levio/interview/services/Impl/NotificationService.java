@@ -1,5 +1,6 @@
 package ca.levio.interview.services.Impl;
 
+import ca.levio.interview.dtos.NotificationMessagingDto;
 import ca.levio.interview.services.INotificationMessage;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -8,16 +9,20 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 @Service
 public class NotificationService implements INotificationMessage {
     private JavaMailSender javaMailSender;
+    private final TemplateEngine templateEngine;
 
-    public NotificationService(JavaMailSender javaMailSender) {
+    public NotificationService(JavaMailSender javaMailSender, TemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
+        this.templateEngine = templateEngine;
     }
  @Async
    public void sendEmail(String message, String destinataire[], String copy[], String subject) {
@@ -35,18 +40,18 @@ public class NotificationService implements INotificationMessage {
     }
 
     @Async
-    public void sendHtmlMessage() throws MessagingException {
+    public void sendHtmlMessage(String template, NotificationMessagingDto messaging, UUID skillInterViewTechnicalId) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
         Context context = new Context();
-        /*context.setVariables(email.getProperties());
-        helper.setFrom(email.getFrom());
-        helper.setTo(email.getTo());
-        helper.setSubject(email.getSubject());
-        String html = templateEngine.process(email.getTemplate(), context);
-        helper.setText(html, true);
+        context.setVariable("msg",messaging);
+        context.setVariable("skill_id",skillInterViewTechnicalId);
 
-        log.info("Sending email: {} with html body: {}", email, html);
-        emailSender.send(message);*/
+        helper.setFrom(messaging.getRecruiterEmail());
+        helper.setTo(messaging.getTechnicalAdvisorEmail());
+        helper.setSubject(messaging.getCandidatejobPosition());
+        String html = templateEngine.process(template, context);
+        helper.setText(html, true);
+        javaMailSender.send(message);
     }
 }
