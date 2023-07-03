@@ -14,8 +14,4 @@ public interface IInterviewProcess {
 
     public InterviewDto createOrUpdate(InterviewDto element_dto);
     public void delete(UUID id);
-
-    SkillInterviewDto linkInterviewTechnicalAccept(UUID skillId);
-
-    SkillInterviewDto linkInterviewTechnicalReject(UUID skillId);
 }

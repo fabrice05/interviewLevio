@@ -40,17 +40,4 @@ private final IInterviewProcess interview;
     public void deleteInterview(@PathVariable UUID id) {
         interview.delete(id);
     }
-
-    @GetMapping("/accept/{SkillId}")
-    public InterviewDto acceptInterview(@PathVariable("SkillId") UUID SkillId) {
-        System.out.println("Interview Acceptée");
-        interview.linkInterviewTechnicalAccept(SkillId);
-        return null;
-    }
-    @GetMapping("/reject/{SkillId}")
-    public InterviewDto rejectInterview(@PathVariable("SkillId") UUID SkillId) {
-        System.out.println("Interview rejetée");
-        interview.linkInterviewTechnicalReject(SkillId);
-        return null;
-    }
 }

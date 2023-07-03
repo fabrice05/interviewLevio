@@ -6,7 +6,7 @@ import ca.levio.interview.dtos.NotificationMessagingDto;
 
 import ca.levio.interview.messages.MessageProducer;
 import ca.levio.interview.services.INotificationMessage;
-import ca.levio.interview.services.Impl.TechnicalAdvisorCheking;
+import ca.levio.interview.services.Impl.TechnicalAdvisorChekingService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private  final MessageProducer producer;
-    private  final TechnicalAdvisorCheking checking;
+    private  final TechnicalAdvisorChekingService checking;
     private INotificationMessage mail;
 
-    public TestController(MessageProducer producer, TechnicalAdvisorCheking checking, INotificationMessage mail) {
+    public TestController(MessageProducer producer, TechnicalAdvisorChekingService checking, INotificationMessage mail) {
         this.producer = producer;
         this.checking = checking;
         this.mail = mail;

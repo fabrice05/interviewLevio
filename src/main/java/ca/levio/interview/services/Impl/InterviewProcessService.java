@@ -7,7 +7,7 @@ import ca.levio.interview.db.repositories.TechnicalAdvisorRepository;
 import ca.levio.interview.dtos.NotificationMessagingDto;
 import ca.levio.interview.dtos.SkillInterviewDto;
 import ca.levio.interview.messages.MessageProducer;
-import ca.levio.interview.services.DtoAndEntityConversion;
+import ca.levio.interview.services.IDtoAndEntityConversion;
 import ca.levio.interview.db.repositories.InterviewRepository;
 import ca.levio.interview.dtos.InterviewDto;
 import ca.levio.interview.services.IInterviewProcess;
@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class InterviewProcessService implements IInterviewProcess {
-    private final TechnicalAdvisorCheking technical;
+    private final TechnicalAdvisorChekingService technical;
     private  final MessageProducer messageProducer;
     private final SkillInterviewRepository skillInterviewRepository;
     private final InterviewRepository interviewRepository;
     private JobPositionRepository jobPositionRepository;
     private final TechnicalAdvisorRepository technicalAdvisorRepository;
 
-    public InterviewProcessService(TechnicalAdvisorCheking technical, MessageProducer messageProducer, SkillInterviewRepository skillInterviewRepository, InterviewRepository interviewRepository, JobPositionRepository jobPositionRepository, TechnicalAdvisorRepository technicalAdvisorRepository) {
+    public InterviewProcessService(TechnicalAdvisorChekingService technical, MessageProducer messageProducer, SkillInterviewRepository skillInterviewRepository, InterviewRepository interviewRepository, JobPositionRepository jobPositionRepository, TechnicalAdvisorRepository technicalAdvisorRepository) {
         this.technical = technical;
         this.messageProducer = messageProducer;
         this.skillInterviewRepository = skillInterviewRepository;
@@ -37,7 +37,7 @@ public class InterviewProcessService implements IInterviewProcess {
     private List<InterviewDto> mapList(List<Interview> source) {
         return  source
                 .stream()
-                .map(element -> DtoAndEntityConversion.MAPPER.mapEntitytoDTO(element))
+                .map(element -> IDtoAndEntityConversion.MAPPER.mapEntitytoDTO(element))
                 .collect(Collectors.toList());
     }
 
@@ -48,16 +48,16 @@ public class InterviewProcessService implements IInterviewProcess {
     public  InterviewDto getApplicant(UUID id) {
         Interview element_jpa=  interviewRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Entity not found"));
-        return  DtoAndEntityConversion.MAPPER.mapEntitytoDTO(element_jpa);
+        return  IDtoAndEntityConversion.MAPPER.mapEntitytoDTO(element_jpa);
     }
 
     public InterviewDto createOrUpdate(InterviewDto interviewDto) {
-        Interview interview = DtoAndEntityConversion.MAPPER.mapDTOtoEntity(interviewDto);
+        Interview interview = IDtoAndEntityConversion.MAPPER.mapDTOtoEntity(interviewDto);
         interview= interviewRepository.save(interview);
         // Map Messaging to Works
         createTechnicalChoise(interview);
         //
-        return  DtoAndEntityConversion.MAPPER.mapEntitytoDTO(interview);
+        return  IDtoAndEntityConversion.MAPPER.mapEntitytoDTO(interview);
     }
     public void delete(UUID id) {
         interviewRepository.deleteById(id);
@@ -96,26 +96,5 @@ public class InterviewProcessService implements IInterviewProcess {
         skill.setFirstChoiceTechnical(messaging.getPreselectedTechnicalAdvisor());
         skill=skillInterviewRepository.save(skill);
         return skill.getId();
-    }
-
-    @Override
-    public SkillInterviewDto linkInterviewTechnicalAccept(UUID skillId) {
-        SkillInterview skill=skillInterviewRepository.getReferenceById(skillId);
-        //si status <> OPEN, il y'a deja eu une prise de décision
-        skill.setStatus("ACCEPT");
-        skillInterviewRepository.save(skill);
-        return null;
-    }
-
-    @Override
-    public SkillInterviewDto linkInterviewTechnicalReject(UUID skillId) {
-        SkillInterview skill=skillInterviewRepository.getReferenceById(skillId);
-        //si status <> OPEN, il y'a deja eu une prise de décision
-        //si c'est la personne par defaut supprimer la liaison, voir si d'autres ont accepté et choisi un autre par défaut
-        skill.setStatus("REJECT");
-
-
-        skillInterviewRepository.save(skill);
-        return null;
     }
 }

@@ -5,18 +5,14 @@ import ca.levio.interview.db.repositories.JobPositionRepository;
 import ca.levio.interview.db.repositories.TechnicalAdvisorSkillRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
-public class TechnicalAdvisorCheking {
+public class TechnicalAdvisorChekingService {
     final TechnicalAdvisorSkillRepository repository;
     final  JobPositionRepository jobPositionRepository;
-    public TechnicalAdvisorCheking(TechnicalAdvisorSkillRepository repository, JobPositionRepository jobPositionRepository) {
+    public TechnicalAdvisorChekingService(TechnicalAdvisorSkillRepository repository, JobPositionRepository jobPositionRepository) {
         this.repository = repository;
         this.jobPositionRepository = jobPositionRepository;
     }

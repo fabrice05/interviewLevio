@@ -8,8 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface DtoAndEntityConversion {
-    DtoAndEntityConversion MAPPER = Mappers.getMapper(DtoAndEntityConversion.class);
+public interface IDtoAndEntityConversion {
+    IDtoAndEntityConversion MAPPER = Mappers.getMapper(IDtoAndEntityConversion.class);
    Interview mapDTOtoEntity(InterviewDto dto);
     InterviewDto mapEntitytoDTO(Interview Entity);
 
