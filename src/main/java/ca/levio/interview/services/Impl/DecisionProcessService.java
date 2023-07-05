@@ -40,7 +40,7 @@ public class DecisionProcessService implements IDecisionProcess {
         //si c'est la personne par defaut supprimer la liaison, voir si d'autres ont accepté et choisi un autre par défaut
         if(!technicalAdvisorInterview.getStatus().equals("OPEN")) // ENUM
         {
-            if(technicalAdvisorInterview.getFirstChoiceTechnical()){
+            if(technicalAdvisorInterview.isFirstChoiceTechnical()){
                 technicalAdvisorInterview.setFirstChoiceTechnical(false);
             }
 
