@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-@Entity(name = "lineofbusiness")
+@Entity(name = "line_of_business")
 public class LineOfBusiness {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-@Entity(name = "jobposition")
+@Entity(name = "job_position")
 public class JobPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,28 +19,25 @@ public class JobPosition {
     @Column(name = "name", nullable = false, length = 150,unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "jobPosition", orphanRemoval = true)
-    private Collection<TechnicalAdvisor> technicalAdvisors = new ArrayList<>();
-
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
     @JoinColumn(name = "line_of_business_id", nullable = false)
     private LineOfBusiness lineOfBusiness;
 
-    @ManyToOne
+    @ManyToOne(optional = true,fetch = FetchType.EAGER)
     @JoinColumn(name = "job_parent_id")
     private JobPosition jobPosition;
 
     @OneToMany(mappedBy = "jobPosition", orphanRemoval = true)
-    private Collection<SkillInterview> skills = new ArrayList<>();
+    private Collection<Skill> skills = new ArrayList<>();
 
     public JobPosition(UUID jobPositionId) {
     }
 
-    public Collection<SkillInterview> getSkills() {
+    public Collection<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<SkillInterview> skills) {
+    public void setSkills(Collection<Skill> skills) {
         this.skills = skills;
     }
 
@@ -72,13 +69,6 @@ public class JobPosition {
         return id;
     }
 
-    public Collection<TechnicalAdvisor> getTechnicalAdvisors() {
-        return technicalAdvisors;
-    }
-
-    public void setTechnicalAdvisors(Collection<TechnicalAdvisor> technicalAdvisors) {
-        this.technicalAdvisors = technicalAdvisors;
-    }
 
     public void setId(UUID id) {
         this.id = id;

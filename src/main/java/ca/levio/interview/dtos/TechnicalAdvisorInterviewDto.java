@@ -1,24 +1,19 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.Interview;
-import ca.levio.interview.db.entities.JobPosition;
-import ca.levio.interview.db.entities.TechnicalAdvisor;
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.SqlTypes;
-
 import java.sql.Date;
 import java.util.UUID;
 
-public class SkillInterviewDto {
+public class TechnicalAdvisorInterviewDto {
     private UUID id;
     private String status;
     private Date createdAt;
     private Date updatedAt;
-    private Boolean firstChoiceTechnical;
+    private boolean firstChoiceTechnical;
+
+    private UUID technicalAdvisorId;
+
+    private UUID interviewId;
 
     public UUID getId() {
         return id;
@@ -52,11 +47,27 @@ public class SkillInterviewDto {
         this.updatedAt = updatedAt;
     }
 
-    public Boolean getFirstChoiceTechnical() {
+    public boolean isFirstChoiceTechnical() {
         return firstChoiceTechnical;
     }
 
-    public void setFirstChoiceTechnical(Boolean firstChoiceTechnical) {
+    public void setFirstChoiceTechnical(boolean firstChoiceTechnical) {
         this.firstChoiceTechnical = firstChoiceTechnical;
+    }
+
+    public UUID getTechnicalAdvisorId() {
+        return technicalAdvisorId;
+    }
+
+    public void setTechnicalAdvisorId(UUID technicalAdvisorId) {
+        this.technicalAdvisorId = technicalAdvisorId;
+    }
+
+    public UUID getInterviewId() {
+        return interviewId;
+    }
+
+    public void setInterviewId(UUID interviewId) {
+        this.interviewId = interviewId;
     }
 }

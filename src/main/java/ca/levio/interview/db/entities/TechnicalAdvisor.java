@@ -2,42 +2,38 @@ package ca.levio.interview.db.entities;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-@Entity(name = "technicaladvisor")
+@Entity(name = "technical_advisor")
 public class TechnicalAdvisor {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
-
-    @Column(name = "levelofexpertise", nullable = false)
-    private LevelOfExpertise levelOfExpertise;
     @Column(name = "name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "actif")
-    private Boolean isActif;
+    @Column(name = "activ")
+    private boolean isActiv;
 
     @Column(name = "email", length = 100)
     private String email;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "job_position_id", nullable = false)
-    private JobPosition jobPosition;
     @OneToMany(mappedBy = "technicalAdvisor", orphanRemoval = true)
-    private Collection<SkillInterview> skills = new ArrayList<>();
+    private Collection<TechnicalAdvisorInterview> skills = new ArrayList<>();
 
-    public Collection<SkillInterview> getSkills() {
+    @ManyToOne
+    @JoinColumn(name = "skill_id")
+    private Skill skill;
+
+    public Collection<TechnicalAdvisorInterview> getSkills() {
         return skills;
     }
 
-    public void setSkills(Collection<SkillInterview> skills) {
+    public void setSkills(Collection<TechnicalAdvisorInterview> skills) {
         this.skills = skills;
     }
 
@@ -49,12 +45,12 @@ public class TechnicalAdvisor {
         this.email = email;
     }
 
-    public Boolean getActif() {
-        return isActif;
+    public boolean getActif() {
+        return isActiv;
     }
 
-    public void setActif(Boolean actif) {
-        isActif = actif;
+    public void setActif(boolean actif) {
+        isActiv = actif;
     }
 
     public String getName() {
@@ -69,22 +65,6 @@ public class TechnicalAdvisor {
         return id;
     }
 
-    public LevelOfExpertise getLevelOfExpertise() {
-        return levelOfExpertise;
-    }
-
-    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
-        this.levelOfExpertise = levelOfExpertise;
-    }
-
-    public JobPosition getJobPosition() {
-        return jobPosition;
-    }
-
-    public void setJobPosition(JobPosition jobPosition) {
-        this.jobPosition = jobPosition;
-    }
-
     public void setId(UUID id) {
         this.id = id;
     }
@@ -92,7 +72,25 @@ public class TechnicalAdvisor {
     public TechnicalAdvisor() {
     }
 
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
+    }
+
     public TechnicalAdvisor(UUID id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "TechnicalAdvisor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", isActiv=" + isActiv +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

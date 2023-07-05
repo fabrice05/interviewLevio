@@ -1,6 +1,6 @@
 
 /* lineofbusiness  seeding */
-insert into lineofbusiness(id,name)
+/*insert into lineofbusiness(id,name)
 values
     ('14be9b1f-2b4a-44d9-b0bf-e12131518a29','Ingénierie logicielle'),
     ('5e9e3533-c0a3-4be5-9fe1-133b077e46b4','Stratégie et performance d''affaires'),
@@ -144,3 +144,5 @@ select tec.levelofexpertise levelofexpertiseskill ,
        tec.job_position_id,tec.id technical_advisor_id,job.name job_name, job.line_of_business_id,
        job.job_parent_id, tec.name technicaladvisorname, tec.email technicaladvisoremail, tec.actif technicaladvisoractif
 From jobposition job inner join technicaladvisor tec ON job.id=tec.job_position_id;
+
+ */

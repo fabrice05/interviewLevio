@@ -10,10 +10,10 @@ import java.util.UUID;
 @Entity()
 @Immutable
 @Subselect("select * from technical_advisor_skill")
-public class TechnicalAdvisorAndSkill {
+public class ViewTechnicalAdvisorAndSkill {
 
     @Column(name = "levelofexpertiseskill", nullable = false)
-    private LevelOfExpertise levelOfExpertise;
+    private ELevelOfExpertise levelOfExpertise;
     @Column(name = "job_position_id", nullable = false)
     private UUID jobPositionId;
     @Id
@@ -34,11 +34,11 @@ public class TechnicalAdvisorAndSkill {
 
     @Column(name = "technicaladvisoremail", length = 100)
     private String technicalAdvisorEmail;
-    public LevelOfExpertise getLevelOfExpertise() {
+    public ELevelOfExpertise getLevelOfExpertise() {
         return levelOfExpertise;
     }
 
-    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
+    public void setLevelOfExpertise(ELevelOfExpertise levelOfExpertise) {
         this.levelOfExpertise = levelOfExpertise;
     }
     public String getJobName() {

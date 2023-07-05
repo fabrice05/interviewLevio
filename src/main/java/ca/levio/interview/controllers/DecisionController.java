@@ -2,10 +2,7 @@ package ca.levio.interview.controllers;
 
 import ca.levio.interview.dtos.InterviewDto;
 import ca.levio.interview.services.IDecisionProcess;
-import ca.levio.interview.services.IInterviewProcess;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,4 +26,5 @@ private final IDecisionProcess decisionProcess;
         decisionProcess.linkInterviewTechnicalReject(SkillId);
         return null;
     }
+    // remettre les Skill pour garder l'information entre TechnicalAdvisor et Skill
 }

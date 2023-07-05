@@ -10,8 +10,8 @@ import org.hibernate.type.SqlTypes;
 import java.sql.Date;
 import java.util.UUID;
 
-@Entity(name = "skill_interview")
-public class SkillInterview {
+@Entity(name = "technical_advisor_interview")
+public class TechnicalAdvisorInterview {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -31,13 +31,10 @@ public class SkillInterview {
     private Interview interview;
 
     @ManyToOne
-    @JoinColumn(name = "job_position_id")
-    private JobPosition jobPosition;
-    @ManyToOne
     @JoinColumn(name = "technical_advisor_id")
     private TechnicalAdvisor technicalAdvisor;
-    @Column(name = "technical_preselectionne", nullable = true)
-    private Boolean firstChoiceTechnical;
+    @Column(name = "technical_default_select", nullable = true)
+    private boolean firstChoiceTechnical;
     public Interview getInterview() {
         return interview;
     }
@@ -70,14 +67,6 @@ public class SkillInterview {
         this.id = id;
     }
 
-    public JobPosition getJobPosition() {
-        return jobPosition;
-    }
-
-    public void setJobPosition(JobPosition jobPosition) {
-        this.jobPosition = jobPosition;
-    }
-
     public TechnicalAdvisor getTechnicalAdvisor() {
         return technicalAdvisor;
     }
@@ -86,7 +75,7 @@ public class SkillInterview {
         this.technicalAdvisor = technicalAdvisor;
     }
 
-    public SkillInterview() {
+    public TechnicalAdvisorInterview() {
     }
 
     public String getStatus() {
@@ -97,17 +86,16 @@ public class SkillInterview {
         this.status = status;
     }
 
-    public Boolean getFirstChoiceTechnical() {
+    public TechnicalAdvisorInterview(String status, Interview interview) {
+        this.status = status;
+        this.interview = interview;
+    }
+
+    public boolean isFirstChoiceTechnical() {
         return firstChoiceTechnical;
     }
 
-    public void setFirstChoiceTechnical(Boolean firstChoiceTechnical) {
+    public void setFirstChoiceTechnical(boolean firstChoiceTechnical) {
         this.firstChoiceTechnical = firstChoiceTechnical;
-    }
-
-    public SkillInterview(String status, Interview interview, JobPosition jobPosition) {
-        this.status = status;
-        this.interview = interview;
-        this.jobPosition = jobPosition;
     }
 }

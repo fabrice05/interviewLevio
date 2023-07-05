@@ -1,8 +1,7 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.LevelOfExpertise;
-import jakarta.persistence.*;
+import ca.levio.interview.db.entities.ELevelOfExpertise;
 import jakarta.validation.constraints.*;
 
 import java.util.UUID;
@@ -12,27 +11,14 @@ public class InterviewDto {
     @NotNull
     private String description;
     @NotNull
-    @Column(name = "interviewtype", length = 10) //Interne or Externe
+    //Interne or Externe
     private String interviewType;
-    @Column(name = "urgent")
-    private Boolean urgent;
-
-    @Column(name = "interview_status", nullable = false, length = 20)
+    private boolean urgent;
     private String interviewStatus;
-    //  Candidate Information
-    @Column(name = "candidate_full_name", nullable = false, length = 200)
     private String CandidateName;
-    @Column(name = "jobposition", length = 100)
     private String jobPosition;
-
-    @Column(name = "level_of_expertise",nullable = false)
-    private LevelOfExpertise levelOfExpertise;
-
-//  Recruiter Information
-
-    @Column(name = "Recruiter_full_name", nullable = false, length = 150)
+    private ELevelOfExpertise levelOfExpertiseCandidate;
     private String recruiterName;
-    @Column(name = "recruiter_email", length = 100)
     private String recruiterEmail;
 
     public UUID getId() {
@@ -59,11 +45,11 @@ public class InterviewDto {
         this.interviewType = interviewType;
     }
 
-    public Boolean getUrgent() {
+    public boolean isUrgent() {
         return urgent;
     }
 
-    public void setUrgent(Boolean urgent) {
+    public void setUrgent(boolean urgent) {
         this.urgent = urgent;
     }
 
@@ -91,12 +77,12 @@ public class InterviewDto {
         this.jobPosition = jobPosition;
     }
 
-    public LevelOfExpertise getLevelOfExpertise() {
-        return levelOfExpertise;
+    public ELevelOfExpertise getLevelOfExpertiseCandidate() {
+        return levelOfExpertiseCandidate;
     }
 
-    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
-        this.levelOfExpertise = levelOfExpertise;
+    public void setLevelOfExpertiseCandidate(ELevelOfExpertise levelOfExpertiseCandidate) {
+        this.levelOfExpertiseCandidate = levelOfExpertiseCandidate;
     }
 
     public String getRecruiterName() {
@@ -125,7 +111,7 @@ public class InterviewDto {
                 ", interviewStatus='" + interviewStatus + '\'' +
                 ", CandidateName='" + CandidateName + '\'' +
                 ", jobPosition='" + jobPosition + '\'' +
-                ", levelOfExpertise=" + levelOfExpertise +
+                ", levelOfExpertise=" + levelOfExpertiseCandidate +
                 ", recruiterName='" + recruiterName + '\'' +
                 ", recruiterEmail='" + recruiterEmail + '\'' +
                 '}';

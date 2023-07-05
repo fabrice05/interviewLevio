@@ -1,9 +1,7 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.LevelOfExpertise;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import ca.levio.interview.db.entities.ELevelOfExpertise;
 
 import java.util.UUID;
 
@@ -26,10 +24,10 @@ public class NotificationMessagingDto {
     private String interviewStatus;
     private String candidateName;
     private String technicalAdvisorjobPosition;
-    private LevelOfExpertise technicalAdvisorLevelOfExpertise;
+    private ELevelOfExpertise technicalAdvisorLevelOfExpertise;
 
     private String candidatejobPosition;
-    private LevelOfExpertise candidateLevelOfExpertise;
+    private ELevelOfExpertise candidateLevelOfExpertise;
     private String recruiterName;
     private String recruiterEmail;
     private String technicalAdvisorEmail;
@@ -163,11 +161,11 @@ public class NotificationMessagingDto {
         this.technicalAdvisorjobPosition = technicalAdvisorjobPosition;
     }
 
-    public LevelOfExpertise getTechnicalAdvisorLevelOfExpertise() {
+    public ELevelOfExpertise getTechnicalAdvisorLevelOfExpertise() {
         return technicalAdvisorLevelOfExpertise;
     }
 
-    public void setTechnicalAdvisorLevelOfExpertise(LevelOfExpertise technicalAdvisorLevelOfExpertise) {
+    public void setTechnicalAdvisorLevelOfExpertise(ELevelOfExpertise technicalAdvisorLevelOfExpertise) {
         this.technicalAdvisorLevelOfExpertise = technicalAdvisorLevelOfExpertise;
     }
 
@@ -179,11 +177,11 @@ public class NotificationMessagingDto {
         this.candidatejobPosition = candidatejobPosition;
     }
 
-    public LevelOfExpertise getCandidateLevelOfExpertise() {
+    public ELevelOfExpertise getCandidateLevelOfExpertise() {
         return candidateLevelOfExpertise;
     }
 
-    public void setCandidateLevelOfExpertise(LevelOfExpertise candidateLevelOfExpertise) {
+    public void setCandidateLevelOfExpertise(ELevelOfExpertise candidateLevelOfExpertise) {
         this.candidateLevelOfExpertise = candidateLevelOfExpertise;
     }
 
@@ -197,8 +195,8 @@ public class NotificationMessagingDto {
 
     public NotificationMessagingDto(UUID technicalAdvisorcanditateId, String status, Boolean preselectedTechnicalAdvisor, UUID interviewId,
                                     String description, String interviewType, Boolean urgent, String interviewStatus, String candidateName,
-                                    String technicalAdvisorjobPosition, LevelOfExpertise technicalAdvisorLevelOfExpertise, String recruiterName, String recruiterEmail,
-                                    String technicalAdvisorEmail, String candidatejobPosition, LevelOfExpertise candidateLevelOfExpertise,
+                                    String technicalAdvisorjobPosition, ELevelOfExpertise technicalAdvisorLevelOfExpertise, String recruiterName, String recruiterEmail,
+                                    String technicalAdvisorEmail, String candidatejobPosition, ELevelOfExpertise candidateLevelOfExpertise,
                                     UUID jobPositionId) {
         this.technicalAdvisorcanditateId = technicalAdvisorcanditateId;
         this.status = status;

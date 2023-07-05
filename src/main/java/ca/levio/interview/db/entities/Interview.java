@@ -1,10 +1,7 @@
 package ca.levio.interview.db.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,10 +17,10 @@ public class Interview {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
-    @Column(name = "interviewtype", length = 10) //Interne or Externe
+    @Column(name = "interview_type", length = 10) //Interne or Externe
     private String interviewType;
     @Column(name = "urgent")
-    private Boolean urgent;
+    private boolean urgent;
 
     @Column(name = "interview_status", nullable = false, length = 20)
     private String interviewStatus;
@@ -31,29 +28,29 @@ public class Interview {
 //  Candidate Information
     @Column(name = "candidate_full_name", nullable = false, length = 200)
     private String candidateName;
-    @Column(name = "jobposition", length = 100)
+    @Column(name = "job_position_candidate", length = 100)
     private String jobPosition;
 
-    @Column(name = "level_of_expertise",nullable = false)
-    private LevelOfExpertise levelOfExpertise;
+    @Column(name = "level_of_expertise_candidate",nullable = false)
+    private ELevelOfExpertise levelOfExpertiseCandidate;
 
 //  Recruiter Information
 
-    @Column(name = "Recruiter_full_name", nullable = false, length = 150)
+    @Column(name = "recruiter_full_name", nullable = false, length = 150)
     private String recruiterName;
 
     @Column(name = "recruiter_email", length = 100)
     private String recruiterEmail;
 
     @OneToMany(mappedBy = "interview", orphanRemoval = true)
-    private Collection<SkillInterview> skillInterviews = new ArrayList<>();
+    private Collection<TechnicalAdvisorInterview> technicalAdvisorInterviews = new ArrayList<>();
 
-    public Collection<SkillInterview> getSkillInterviews() {
-        return skillInterviews;
+    public Collection<TechnicalAdvisorInterview> getTechnicalAdvisorInterviews() {
+        return technicalAdvisorInterviews;
     }
 
-    public void setSkillInterviews(Collection<SkillInterview> skillInterviews) {
-        this.skillInterviews = skillInterviews;
+    public void setTechnicalAdvisorInterviews(Collection<TechnicalAdvisorInterview> technicalAdvisorInterviews) {
+        this.technicalAdvisorInterviews = technicalAdvisorInterviews;
     }
 
     public String getDescription() {
@@ -72,12 +69,20 @@ public class Interview {
         this.interviewType = interviewType;
     }
 
-    public Boolean getUrgent() {
+    public boolean isUrgent() {
         return urgent;
     }
 
-    public void setUrgent(Boolean urgent) {
+    public void setUrgent(boolean urgent) {
         this.urgent = urgent;
+    }
+
+    public ELevelOfExpertise getLevelOfExpertiseCandidate() {
+        return levelOfExpertiseCandidate;
+    }
+
+    public void setLevelOfExpertiseCandidate(ELevelOfExpertise levelOfExpertiseCandidate) {
+        this.levelOfExpertiseCandidate = levelOfExpertiseCandidate;
     }
 
     public UUID getId() {
@@ -112,13 +117,6 @@ public class Interview {
         this.jobPosition = jobPosition;
     }
 
-    public LevelOfExpertise getLevelOfExpertise() {
-        return levelOfExpertise;
-    }
-
-    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
-        this.levelOfExpertise = levelOfExpertise;
-    }
 
     public String getRecruiterName() {
         return recruiterName;
@@ -146,10 +144,10 @@ public class Interview {
                 ", interviewStatus='" + interviewStatus + '\'' +
                 ", candidateName='" + candidateName + '\'' +
                 ", jobPosition='" + jobPosition + '\'' +
-                ", levelOfExpertise=" + levelOfExpertise +
+                ", levelOfExpertise=" + levelOfExpertiseCandidate +
                 ", recruiterName='" + recruiterName + '\'' +
                 ", recruiterEmail='" + recruiterEmail + '\'' +
-                ", skillInterviews=" + skillInterviews +
+                ", skillInterviews=" + technicalAdvisorInterviews +
                 '}';
     }
 
@@ -159,5 +157,6 @@ public class Interview {
     public Interview(UUID id) {
         this.id = id;
     }
+
 }
 
