@@ -1,4 +1,4 @@
-package ca.levio.interview.services.Impl;
+package ca.levio.interview.services.Impl.Dto;
 
 import ca.levio.interview.db.entities.TechnicalAdvisor;
 import ca.levio.interview.db.repositories.ITechnicalAdvisorRepository;

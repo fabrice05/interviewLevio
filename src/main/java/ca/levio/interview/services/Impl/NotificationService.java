@@ -40,16 +40,16 @@ public class NotificationService implements INotificationMessage {
     }
 
     @Async
-    public void sendHtmlMessage(String template, NotificationMessagingDto messaging, UUID skillInterViewTechnicalId) throws MessagingException {
+    @Override
+    public void sendHtmlMessageCandidate(String template, NotificationMessagingDto msg) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
         Context context = new Context();
-        context.setVariable("msg",messaging);
-        context.setVariable("skill_id",skillInterViewTechnicalId);
+        context.setVariable("msg",msg);
 
-        helper.setFrom(messaging.getRecruiterEmail());
-        helper.setTo(messaging.getTechnicalAdvisorEmail());
-        helper.setSubject(messaging.getCandidatejobPosition());
+        helper.setFrom(msg.getRecruiterEmail());
+        helper.setTo(msg.getTechnicalAdvisorEmail());
+        helper.setSubject("Demande d'interview pour un poste de :"+msg.getCandidatejobPosition());
         String html = templateEngine.process(template, context);
         helper.setText(html, true);
         javaMailSender.send(message);

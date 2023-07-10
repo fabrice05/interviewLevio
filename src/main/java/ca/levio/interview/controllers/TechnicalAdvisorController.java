@@ -1,13 +1,8 @@
 package ca.levio.interview.controllers;
 
-import ca.levio.interview.dtos.LineOfBusinessDto;
 import ca.levio.interview.dtos.TechnicalAdvisorDto;
-import ca.levio.interview.services.Impl.LineOfBusinessService;
-import ca.levio.interview.services.Impl.TechnicalAdvisorService;
+import ca.levio.interview.services.Impl.Dto.TechnicalAdvisorService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/technicalAdvisor")

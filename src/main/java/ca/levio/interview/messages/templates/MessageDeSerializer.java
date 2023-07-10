@@ -10,8 +10,8 @@ import org.apache.kafka.common.serialization.Serializer;
 
 import java.io.IOException;
 
-public class MessageDeSerializer implements Deserializer<NotificationMessagingDto> {
-
+public class MessageDeSerializer {//implements Deserializer<NotificationMessagingDto> {
+/*
     public static final ObjectMapper mapper = JsonMapper.builder()
             .findAndAddModules()
             .build();
@@ -23,5 +23,5 @@ public class MessageDeSerializer implements Deserializer<NotificationMessagingDt
         } catch (IOException e) {
             throw new SerializationException(e);
         }
-    }
+    }*/
 }

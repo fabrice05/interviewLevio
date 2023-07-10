@@ -1,98 +1,83 @@
 package ca.levio.interview.services.Impl;
 
 import ca.levio.interview.db.entities.*;
+import ca.levio.interview.db.entities.Enum.TechnicalInterviewStatus;
 import ca.levio.interview.db.repositories.*;
-import ca.levio.interview.dtos.NotificationMessagingDto;
-import ca.levio.interview.messages.IMessageProducer;
-import ca.levio.interview.services.IDtoAndEntityConversion;
 import ca.levio.interview.dtos.InterviewDto;
-import ca.levio.interview.services.IInterviewProcess;
+import ca.levio.interview.dtos.NotificationMessagingDto;
+import ca.levio.interview.dtos.TechnicalAdvisorInterviewDto;
+import ca.levio.interview.messages.IMessageProducer;
+import ca.levio.interview.services.INotificationMessage;
+import ca.levio.interview.services.Impl.Dto.DtoAndEntityConversionExtension;
+import jakarta.mail.MessagingException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class InterviewProcessService //implements IInterviewProcess
 {
-    private final TechnicalAdvisorChekingService technical;
+    private final TechnicalAdvisorChekingService technicalChecking;
+    private final IInterviewRepository interviewRepository;
+    private final ITechnicalAdvisorInterviewRepository technicalAdvisorInterviewRepository;
     private  final IMessageProducer messageProducer;
-    final ITechnicalAdvisorInterviewRepository technicalAdvisorInterviewRepository;
-    final IInterviewRepository interviewRepository;
-    private IJobPositionRepository jobPositionRepository;
-    final ITechnicalAdvisorRepository technicalAdvisorRepository;
+    private final INotificationMessage mail;
 
-    public InterviewProcessService(TechnicalAdvisorChekingService technical, IMessageProducer messageProducer, ITechnicalAdvisorInterviewRepository
-            technicalAdvisorInterviewRepository, IInterviewRepository interviewRepository, IJobPositionRepository jobPositionRepository, ITechnicalAdvisorRepository  technicalAdvisorRepository) {
-        this.technical = technical;
-        this.messageProducer = messageProducer;
-        this.technicalAdvisorInterviewRepository = technicalAdvisorInterviewRepository;
+
+    @Value("${interview_MAX_NUMBER_TECHNICAL_SEND_BY_CYCLE}")
+    private int maxNumber;
+    @Value("${server_link}")
+    private String serverLink;
+
+    public InterviewProcessService(TechnicalAdvisorChekingService technical, IInterviewRepository interviewRepository, ITechnicalAdvisorInterviewRepository technicalAdvisorInterviewRepository, IMessageProducer messageProducer, INotificationMessage mail) {
+        this.technicalChecking = technical;
         this.interviewRepository = interviewRepository;
-        this.jobPositionRepository = jobPositionRepository;
-        this.technicalAdvisorRepository = technicalAdvisorRepository;
+        this.technicalAdvisorInterviewRepository = technicalAdvisorInterviewRepository;
+        this.messageProducer = messageProducer;
+        this.mail = mail;
     }
-    private List<InterviewDto> mapList(List<Interview> source) {
-        return  source
-                .stream()
-                .map(element -> DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(element))
-                .collect(Collectors.toList());
-    }
-
-    public List<InterviewDto> getAll() {
-        return mapList(interviewRepository.findAll());
-    }
-
-    public  InterviewDto getApplicant(UUID id) {
-        Interview element_jpa=  interviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Entity not found"));
-        return  DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(element_jpa);
-    }
-
-    public InterviewDto createOrUpdate(InterviewDto interviewDto) {
-        Interview interview = DtoAndEntityConversionExtension.MAPPER.mapDTOtoEntity(interviewDto);
-        interview= interviewRepository.save(interview);
-        // Map Messaging to Works
-        createTechnicalChoise(interview);
-        //
-        return  DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(interview);
-    }
-    public void delete(UUID id) {
-        interviewRepository.deleteById(id);
+      public List<TechnicalAdvisorInterview> createTechnicalInterview(InterviewDto interviewDto){
+         List<TechnicalAdvisorInterview> technicalAdvisorInterviewList=new ArrayList<>();
+           List<Skill> technicalMatching = technicalChecking.getListSkillMatching(interviewDto);
+          technicalMatching.forEach(elt->{
+               Interview interview=  interviewRepository.getReferenceById(interviewDto.getId());
+               TechnicalAdvisor technical = elt.getTechnicalAdvisor();
+               TechnicalAdvisorInterview tai=new TechnicalAdvisorInterview(TechnicalInterviewStatus.OPEN,interview,technical);
+              tai=technicalAdvisorInterviewRepository.save(tai);
+              technicalAdvisorInterviewList.add(tai);
+           });
+          firsSelectTechnical(technicalAdvisorInterviewList);
+        return technicalAdvisorInterviewList;
+         }
+    public void firsSelectTechnical(List<TechnicalAdvisorInterview> listTechnical){
+       for(int i=0;i<maxNumber;i++){
+           TechnicalAdvisorInterview technicalAdvisorInterview=  listTechnical.get(i);
+           messageProducer.writeMessage(DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(technicalAdvisorInterview));
+       }
     }
 
-    @Override
-    public String toString() {
-        return "InterviewService{" +
-                "repository=" + interviewRepository.findAll()+ "}";
-    }
+    public void sendInvitationTechnical(TechnicalAdvisorInterviewDto msg) {
+        //notified technical and modified TechnicalAdvisorInterviewDto to Invited
+        TechnicalAdvisorInterview tech=technicalAdvisorInterviewRepository.getReferenceById(msg.getId());
+        TechnicalAdvisor technicalAdvisor=technicalAdvisorInterviewRepository.findTechnicalAdvisor(msg.getId());
+        Interview interview=technicalAdvisorInterviewRepository.findInterview(msg.getId());
+        NotificationMessagingDto messages=new NotificationMessagingDto();
+        messages.setCandidatejobPosition(interview.getLevelOfExpertiseCandidate().name());
+        messages.setServerLink(serverLink);
+        messages.setRecruiterEmail(interview.getRecruiterEmail());
+        messages.setTechnicalAdvisorEmail(technicalAdvisor.getEmail());
+        messages.setTechnicalAdvisorName(technicalAdvisor.getName());
+        messages.setTechnicalAdvisorIntervewId(msg.getId());
+        try {
+            mail.sendHtmlMessageCandidate("sendMailNotification",messages);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+     tech.setStatus(TechnicalInterviewStatus.INVITED);
+        technicalAdvisorInterviewRepository.saveAndFlush(tech);
 
-
-    public void createTechnicalChoise(Interview interview) {
-        List<ViewTechnicalAdvisorAndSkill> setTechnical= technical.getListTechnicalAdvisor(interview);
-        setTechnical.forEach(tech->
-        {
-            TechnicalAdvisorInterview skillInterview=new TechnicalAdvisorInterview("OPEN",interview);
-            NotificationMessagingDto messagingDto=new NotificationMessagingDto(tech.getTechnicalAdvisorId(),"OPEN",false, interview.getId(),
-                interview.getDescription(), interview.getInterviewType(),interview.isUrgent(),interview.getInterviewStatus(), interview.getCandidateName(),
-                tech.getJobName(),tech.getLevelOfExpertise(),interview.getRecruiterName(), interview.getRecruiterEmail(),
-                tech.getTechnicalAdvisorEmail(),
-                    interview.getJobPosition()
-                    ,interview.getLevelOfExpertiseCandidate(),tech.getJobPositionId());
-            System.out.println("Technical "+tech.getTechnicalAdvisorEmail() + " "+tech.getTechnicalAdvisorName());
-            messageProducer.writeMessage(messagingDto);
-        });
-    }
-    public UUID SaveTechnicalCanadidateInterview(NotificationMessagingDto messaging){
-        //Read Information to Kafka
-        // Create Link in database betWeen each Potential TechnicalAdvisor With Interview
-        Interview interview =interviewRepository.getReferenceById(messaging.getInterviewId());
-        JobPosition jobPosition =jobPositionRepository.getReferenceById(messaging.getJobPositionId());
-        TechnicalAdvisor technicalAdvisor= technicalAdvisorRepository.getReferenceById(messaging.getTechnicalAdvisorcanditateId());
-        TechnicalAdvisorInterview skill=new TechnicalAdvisorInterview(messaging.getStatus(),interview);
-        skill.setTechnicalAdvisor(technicalAdvisor);
-        skill.setFirstChoiceTechnical(messaging.getPreselectedTechnicalAdvisor());
-        skill=technicalAdvisorInterviewRepository.save(skill);
-        return skill.getId();
     }
 }

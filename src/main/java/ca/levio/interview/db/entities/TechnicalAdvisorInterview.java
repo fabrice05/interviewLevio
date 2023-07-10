@@ -1,6 +1,7 @@
 package ca.levio.interview.db.entities;
 
 
+import ca.levio.interview.db.entities.Enum.TechnicalInterviewStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -16,8 +17,8 @@ public class TechnicalAdvisorInterview {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
     private UUID id;
-    @Column(name = "status", nullable = false, length = 250)
-    private String status;
+    @Column(name = "status", nullable = false)
+    private TechnicalInterviewStatus status;   //OPEN, INVITED, DECLINED, ACCEPTED
     @CreationTimestamp
     @JdbcTypeCode(SqlTypes.DATE)
     private Date createdAt;
@@ -26,11 +27,11 @@ public class TechnicalAdvisorInterview {
     @JdbcTypeCode(SqlTypes.DATE)
     private Date updatedAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "interview_id")
     private Interview interview;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "technical_advisor_id")
     private TechnicalAdvisor technicalAdvisor;
     @Column(name = "technical_default_select", nullable = true)
@@ -78,17 +79,23 @@ public class TechnicalAdvisorInterview {
     public TechnicalAdvisorInterview() {
     }
 
-    public String getStatus() {
+    public TechnicalInterviewStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TechnicalInterviewStatus status) {
         this.status = status;
     }
 
-    public TechnicalAdvisorInterview(String status, Interview interview) {
+    public TechnicalAdvisorInterview(TechnicalInterviewStatus status, Interview interview) {
         this.status = status;
         this.interview = interview;
+    }
+
+    public TechnicalAdvisorInterview(TechnicalInterviewStatus status, Interview interview, TechnicalAdvisor technicalAdvisor) {
+        this.status = status;
+        this.interview = interview;
+        this.technicalAdvisor = technicalAdvisor;
     }
 
     public boolean isFirstChoiceTechnical() {
@@ -97,5 +104,16 @@ public class TechnicalAdvisorInterview {
 
     public void setFirstChoiceTechnical(boolean firstChoiceTechnical) {
         this.firstChoiceTechnical = firstChoiceTechnical;
+    }
+
+    @Override
+    public String toString() {
+        return "TechnicalAdvisorInterview{" +
+                "id=" + id +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt.getTime() +
+                ", firstChoiceTechnical=" + firstChoiceTechnical +
+                '}';
     }
 }

@@ -1,12 +1,10 @@
-package ca.levio.interview.services.Impl;
+package ca.levio.interview.services.Impl.Dto;
 
+import ca.levio.interview.db.entities.Enum.InterviewStatus;
 import ca.levio.interview.db.entities.Interview;
-import ca.levio.interview.db.entities.JobPosition;
-import ca.levio.interview.db.entities.Skill;
-import ca.levio.interview.db.entities.TechnicalAdvisor;
 import ca.levio.interview.db.repositories.IInterviewRepository;
 import ca.levio.interview.dtos.InterviewDto;
-import ca.levio.interview.dtos.SkillDto;
+import ca.levio.interview.messages.IMessageProducer;
 import ca.levio.interview.services.IManagedOrganisation;
 import ca.levio.interview.services.ManageOrganisationStructure;
 import org.springframework.stereotype.Service;
@@ -17,15 +15,20 @@ import java.util.UUID;
 @Service
 public class InterviewService extends ManageOrganisationStructure<Interview> implements IManagedOrganisation<InterviewDto> {
     final IInterviewRepository interviewRepository;
-    public InterviewService(IInterviewRepository interviewRepository) {
+    private  final IMessageProducer messageProducer;
+    public InterviewService(IInterviewRepository interviewRepository, IMessageProducer messageProducer) {
         super(interviewRepository);
         this.interviewRepository = interviewRepository;
+        this.messageProducer = messageProducer;
     }
     @Override
     public InterviewDto saveDto(InterviewDto s) {
         Interview interview= DtoAndEntityConversionExtension.MAPPER.mapDTOtoEntity(s);
+        interview.setInterviewStatus(InterviewStatus.OPEN);
         interview= super.save(interview);
-        return DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(interview);
+        s= DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(interview);
+        messageProducer.writeMessage(s);
+        return s;
     }
 
     @Override

@@ -1,10 +1,11 @@
 package ca.levio.interview.services.Impl;
 
 import ca.levio.interview.db.entities.*;
+import ca.levio.interview.db.entities.Enum.TechnicalInterviewStatus;
 import ca.levio.interview.db.repositories.ITechnicalAdvisorInterviewRepository;
 import ca.levio.interview.dtos.TechnicalAdvisorInterviewDto;
 import ca.levio.interview.services.IDecisionProcess;
-import ca.levio.interview.services.IDtoAndEntityConversion;
+import ca.levio.interview.services.Impl.Dto.DtoAndEntityConversionExtension;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class DecisionProcessService implements IDecisionProcess {
         if(technicalAdvisorInterview!=null){
             technicalAdvisorInterview.setFirstChoiceTechnical(true);
         }
-        technicalAdvisorInterview.setStatus("ACCEPT");
+        technicalAdvisorInterview.setStatus(TechnicalInterviewStatus.ACCEPTED);
         technicalAdvisorInterview = technicalAdvisorInterviewRepository.save(technicalAdvisorInterview);
         return DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(technicalAdvisorInterview);
     }
@@ -38,7 +39,7 @@ public class DecisionProcessService implements IDecisionProcess {
         TechnicalAdvisorInterview technicalAdvisorInterview=technicalAdvisorInterviewRepository.getReferenceById(skillId);
         //si status <> OPEN, il y'a deja eu une prise de décision
         //si c'est la personne par defaut supprimer la liaison, voir si d'autres ont accepté et choisi un autre par défaut
-        if(!technicalAdvisorInterview.getStatus().equals("OPEN")) // ENUM
+        if(!technicalAdvisorInterview.getStatus().equals(TechnicalInterviewStatus.OPEN)) // ENUM
         {
             if(technicalAdvisorInterview.isFirstChoiceTechnical()){
                 technicalAdvisorInterview.setFirstChoiceTechnical(false);
@@ -48,7 +49,7 @@ public class DecisionProcessService implements IDecisionProcess {
             // Il y'a déjà eu prise de décision pour cette interview
 
         }
-        technicalAdvisorInterview.setStatus("REJECT");
+        technicalAdvisorInterview.setStatus(TechnicalInterviewStatus.DECLINED);
 
         technicalAdvisorInterview = technicalAdvisorInterviewRepository.save(technicalAdvisorInterview);
         return DtoAndEntityConversionExtension.MAPPER.mapEntitytoDTO(technicalAdvisorInterview);

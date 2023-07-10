@@ -9,5 +9,5 @@ public interface INotificationMessage {
   // public void sendEmail(String message, String[] destinataire, String[] copy, String subject);
     public void sendEmail(String message, String destinataire, String copy, String subject);
 
-  public void sendHtmlMessage(String template, NotificationMessagingDto messaging, UUID skillInterViewTechnicalId)throws MessagingException;
+  public void sendHtmlMessageCandidate(String template, NotificationMessagingDto messaging)throws MessagingException;
 }

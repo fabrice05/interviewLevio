@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
 
-public class MessageSerializer implements Serializer<NotificationMessagingDto> {
+public class MessageSerializer{/* implements Serializer<NotificationMessagingDto> {
 
     public static final ObjectMapper mapper = JsonMapper.builder()
             .findAndAddModules()
@@ -20,5 +20,5 @@ public class MessageSerializer implements Serializer<NotificationMessagingDto> {
         } catch (JsonProcessingException e) {
             throw new SerializationException(e);
         }
-    }
+    }*/
 }

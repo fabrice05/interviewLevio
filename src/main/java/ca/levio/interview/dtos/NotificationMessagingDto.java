@@ -1,148 +1,35 @@
 package ca.levio.interview.dtos;
 
 
-import ca.levio.interview.db.entities.ELevelOfExpertise;
+import ca.levio.interview.db.entities.Enum.ELevelOfExpertise;
+import ca.levio.interview.db.entities.Enum.InterviewStatus;
+import ca.levio.interview.db.entities.Enum.InterviewType;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class NotificationMessagingDto {
-    private  UUID jobPositionId;
-
-    private String message;
-    private String copy;
-
-    private String subject;
-
-
-    private UUID technicalAdvisorcanditateId;
-    private String status="OPEN";
-    private Boolean preselectedTechnicalAdvisor;
-    private UUID interviewId;
-    private String description;
-    private String interviewType;
-    private Boolean urgent;
-    private String interviewStatus;
-    private String candidateName;
-    private String technicalAdvisorjobPosition;
-    private ELevelOfExpertise technicalAdvisorLevelOfExpertise;
-
+public class NotificationMessagingDto implements Serializable {
     private String candidatejobPosition;
-    private ELevelOfExpertise candidateLevelOfExpertise;
-    private String recruiterName;
-    private String recruiterEmail;
+   private String technicalAdvisorName;
     private String technicalAdvisorEmail;
+    private UUID technicalAdvisorIntervewId;
+    private String serverLink;
+    private String recruiterEmail;
 
-    public String getMessage() {
-        return message;
+    public String getCandidatejobPosition() {
+        return candidatejobPosition;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setCandidatejobPosition(String candidatejobPosition) {
+        this.candidatejobPosition = candidatejobPosition;
     }
 
-    public String getCopy() {
-        return copy;
+    public String getTechnicalAdvisorName() {
+        return technicalAdvisorName;
     }
 
-    public void setCopy(String copy) {
-        this.copy = copy;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public UUID getTechnicalAdvisorcanditateId() {
-        return technicalAdvisorcanditateId;
-    }
-
-    public void setTechnicalAdvisorcanditateId(UUID technicalAdvisorcanditateId) {
-        this.technicalAdvisorcanditateId = technicalAdvisorcanditateId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Boolean getPreselectedTechnicalAdvisor() {
-        return preselectedTechnicalAdvisor;
-    }
-
-    public void setPreselectedTechnicalAdvisor(Boolean preselectedTechnicalAdvisor) {
-        this.preselectedTechnicalAdvisor = preselectedTechnicalAdvisor;
-    }
-
-    public UUID getInterviewId() {
-        return interviewId;
-    }
-
-    public void setInterviewId(UUID interviewId) {
-        this.interviewId = interviewId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getInterviewType() {
-        return interviewType;
-    }
-
-    public void setInterviewType(String interviewType) {
-        this.interviewType = interviewType;
-    }
-
-    public Boolean getUrgent() {
-        return urgent;
-    }
-
-    public void setUrgent(Boolean urgent) {
-        this.urgent = urgent;
-    }
-
-    public String getInterviewStatus() {
-        return interviewStatus;
-    }
-
-    public void setInterviewStatus(String interviewStatus) {
-        this.interviewStatus = interviewStatus;
-    }
-
-    public String getCandidateName() {
-        return candidateName;
-    }
-
-    public void setCandidateName(String candidateName) {
-        this.candidateName = candidateName;
-    }
-
-
-    public String getRecruiterName() {
-        return recruiterName;
-    }
-
-    public void setRecruiterName(String recruiterName) {
-        this.recruiterName = recruiterName;
-    }
-
-    public String getRecruiterEmail() {
-        return recruiterEmail;
-    }
-
-    public void setRecruiterEmail(String recruiterEmail) {
-        this.recruiterEmail = recruiterEmail;
+    public void setTechnicalAdvisorName(String technicalAdvisorName) {
+        this.technicalAdvisorName = technicalAdvisorName;
     }
 
     public String getTechnicalAdvisorEmail() {
@@ -153,94 +40,27 @@ public class NotificationMessagingDto {
         this.technicalAdvisorEmail = technicalAdvisorEmail;
     }
 
-    public String getTechnicalAdvisorjobPosition() {
-        return technicalAdvisorjobPosition;
+    public UUID getTechnicalAdvisorIntervewId() {
+        return technicalAdvisorIntervewId;
     }
 
-    public void setTechnicalAdvisorjobPosition(String technicalAdvisorjobPosition) {
-        this.technicalAdvisorjobPosition = technicalAdvisorjobPosition;
+    public void setTechnicalAdvisorIntervewId(UUID technicalAdvisorIntervewId) {
+        this.technicalAdvisorIntervewId = technicalAdvisorIntervewId;
     }
 
-    public ELevelOfExpertise getTechnicalAdvisorLevelOfExpertise() {
-        return technicalAdvisorLevelOfExpertise;
+    public String getServerLink() {
+        return serverLink;
     }
 
-    public void setTechnicalAdvisorLevelOfExpertise(ELevelOfExpertise technicalAdvisorLevelOfExpertise) {
-        this.technicalAdvisorLevelOfExpertise = technicalAdvisorLevelOfExpertise;
+    public void setServerLink(String serverLink) {
+        this.serverLink = serverLink;
     }
 
-    public String getCandidatejobPosition() {
-        return candidatejobPosition;
+    public String getRecruiterEmail() {
+        return recruiterEmail;
     }
 
-    public void setCandidatejobPosition(String candidatejobPosition) {
-        this.candidatejobPosition = candidatejobPosition;
-    }
-
-    public ELevelOfExpertise getCandidateLevelOfExpertise() {
-        return candidateLevelOfExpertise;
-    }
-
-    public void setCandidateLevelOfExpertise(ELevelOfExpertise candidateLevelOfExpertise) {
-        this.candidateLevelOfExpertise = candidateLevelOfExpertise;
-    }
-
-    public UUID getJobPositionId() {
-        return jobPositionId;
-    }
-
-    public void setJobPositionId(UUID jobPositionId) {
-        this.jobPositionId = jobPositionId;
-    }
-
-    public NotificationMessagingDto(UUID technicalAdvisorcanditateId, String status, Boolean preselectedTechnicalAdvisor, UUID interviewId,
-                                    String description, String interviewType, Boolean urgent, String interviewStatus, String candidateName,
-                                    String technicalAdvisorjobPosition, ELevelOfExpertise technicalAdvisorLevelOfExpertise, String recruiterName, String recruiterEmail,
-                                    String technicalAdvisorEmail, String candidatejobPosition, ELevelOfExpertise candidateLevelOfExpertise,
-                                    UUID jobPositionId) {
-        this.technicalAdvisorcanditateId = technicalAdvisorcanditateId;
-        this.status = status;
-        this.preselectedTechnicalAdvisor = preselectedTechnicalAdvisor;
-        this.interviewId = interviewId;
-        this.description = description;
-        this.interviewType = interviewType;
-        this.urgent = urgent;
-        this.interviewStatus = interviewStatus;
-        this.candidateName = candidateName;
-        this.technicalAdvisorjobPosition = technicalAdvisorjobPosition;
-        this.technicalAdvisorLevelOfExpertise = technicalAdvisorLevelOfExpertise;
-        this.recruiterName = recruiterName;
+    public void setRecruiterEmail(String recruiterEmail) {
         this.recruiterEmail = recruiterEmail;
-        this.technicalAdvisorEmail = technicalAdvisorEmail;
-        this.candidatejobPosition = candidatejobPosition;
-        this.candidateLevelOfExpertise = candidateLevelOfExpertise;
-        this.jobPositionId=jobPositionId;
-    }
-    public NotificationMessagingDto() {
-    }
-
-    @Override
-    public String toString() {
-        return "NotificationMessagingDto{" +
-                "message='" + message + '\'' +
-                ", copy='" + copy + '\'' +
-                ", subject='" + subject + '\'' +
-                ", TechnicalAdvisorcanditateId=" + technicalAdvisorcanditateId +
-                ", status='" + status + '\'' +
-                ", preselectedTechnicalAdvisor=" + preselectedTechnicalAdvisor +
-                ", interviewId=" + interviewId +
-                ", description='" + description + '\'' +
-                ", interviewType='" + interviewType + '\'' +
-                ", urgent=" + urgent +
-                ", interviewStatus='" + interviewStatus + '\'' +
-                ", candidateName='" + candidateName + '\'' +
-                ", technicalAdvisorjobPosition='" + technicalAdvisorjobPosition + '\'' +
-                ", technicalAdvisorLevelOfExpertise=" + technicalAdvisorLevelOfExpertise +
-                ", candidatejobPosition='" + candidatejobPosition + '\'' +
-                ", candidateLevelOfExpertise=" + candidateLevelOfExpertise +
-                ", recruiterName='" + recruiterName + '\'' +
-                ", recruiterEmail='" + recruiterEmail + '\'' +
-                ", TechnicalAdvisorEmail='" + technicalAdvisorEmail + '\'' +
-                '}';
     }
 }

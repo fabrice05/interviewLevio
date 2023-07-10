@@ -3,46 +3,42 @@ package ca.levio.interview.services.Impl;
 import ca.levio.interview.db.entities.*;
 import ca.levio.interview.db.repositories.IJobPositionRepository;
 import ca.levio.interview.db.repositories.ISkillRepository;
-import ca.levio.interview.db.repositories.IViewTechnicalAdvisorAndSkillRepository;
+import ca.levio.interview.dtos.InterviewDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TechnicalAdvisorChekingService {
-    final ISkillRepository repository;
-    final IViewTechnicalAdvisorAndSkillRepository viewTechnicalAdvisorAndSkill;
+    final ISkillRepository skillRepository;
     final IJobPositionRepository jobPositionRepository;
-    public TechnicalAdvisorChekingService(ISkillRepository repository, IViewTechnicalAdvisorAndSkillRepository viewTechnicalAdvisorAndSkill, IJobPositionRepository jobPositionRepository) {
-        this.repository = repository;
-        this.viewTechnicalAdvisorAndSkill = viewTechnicalAdvisorAndSkill;
+
+    public TechnicalAdvisorChekingService( ISkillRepository skillRepository, IJobPositionRepository jobPositionRepository) {
+        this.skillRepository = skillRepository;
         this.jobPositionRepository = jobPositionRepository;
     }
-    public List<ViewTechnicalAdvisorAndSkill> getListTechnicalAdvisor(Interview interview) {
-    //private List<TechnicalAdvisorAndSkill> getListTechnicalAdvisor(String name, LevelOfExpertise level) {
-        //List of Job position by the current Title Job of candidate
-        JobPosition actualJobPositionSon =jobPositionRepository.findByName(interview.getJobPosition());
-        List<ViewTechnicalAdvisorAndSkill> setOfTechnicalAdvisor=new ArrayList<>();
-           if(actualJobPositionSon!=null) {
-               JobPosition actualJobPositionParent = actualJobPositionSon.getJobPosition();
-               while (actualJobPositionParent != null) {
-                   setOfTechnicalAdvisor.addAll(repository.findByjobPositionId(actualJobPositionParent.getId()));
-                   actualJobPositionParent = actualJobPositionParent.getJobPosition();
+
+      List<Skill> getListSkillMatching(InterviewDto interview){
+      // Same JobPosition with higth level
+        List<Skill> listTechnical= skillRepository.findSkillByJobPosition_IdAndLevelOfExpertiseGreaterThan(interview.getJobPositionCandidateId(), interview.getLevelOfExpertiseCandidate());
+        JobPosition actualJobPosition= jobPositionRepository.getReferenceById(interview.getJobPositionCandidateId());
+     // find for JobParent
+       if(listTechnical==null){
+           listTechnical=new ArrayList<>();
+       }
+          UUID idparent=actualJobPosition.getId();
+          while (actualJobPosition!=null && idparent!=null){
+          idparent= jobPositionRepository.getJobPositionParentId(idparent);
+           if(idparent!=null){
+               actualJobPosition=   jobPositionRepository.getReferenceById(idparent);
+               List<Skill> listTechnicalParent=skillRepository.findSkillByJobPosition_Id(actualJobPosition.getId());
+               if(listTechnicalParent!=null){
+                   listTechnical.addAll(listTechnicalParent) ;
                }
-               //setOfTechnicalAdvisor.addAll(repository.findByJobNameAndLevelOfExpertiseGreaterThan(actualJobPositionSon.getName(), interview.getLevelOfExpertise()));
            }
-        return setOfTechnicalAdvisor;
+   }
+    return listTechnical;
     }
-        public List<ViewTechnicalAdvisorAndSkill> getAll() {
-            return viewTechnicalAdvisorAndSkill.findAll();
-        }
-
-    public List<ViewTechnicalAdvisorAndSkill> getSameTechnicalWithHigthLevel(String jobName, ELevelOfExpertise levelOfExpertise) {
-       // return repository.findByJobNameAndLevelOfExpertiseGreaterThan(jobName, levelOfExpertise);
-        return null;
-    }
-
-
-
 }

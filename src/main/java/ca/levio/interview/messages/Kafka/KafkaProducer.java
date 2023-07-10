@@ -1,6 +1,7 @@
 package ca.levio.interview.messages.Kafka;
 
-import ca.levio.interview.dtos.NotificationMessagingDto;
+import ca.levio.interview.dtos.InterviewDto;
+import ca.levio.interview.dtos.TechnicalAdvisorInterviewDto;
 import ca.levio.interview.messages.IMessageProducer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -10,13 +11,19 @@ import org.springframework.stereotype.Service;
 public class KafkaProducer implements IMessageProducer {
 
     @Value("${interview_creation}")
-    private String topicName;
-    private KafkaTemplate<String, NotificationMessagingDto> kafkaTemplate;
-    public KafkaProducer(KafkaTemplate<String, NotificationMessagingDto> kafkaTemplate) {
+    private String topicInterviewCreation;
+
+    @Value("${interview_advisor_creation}")
+    private String topicAdvisorInterview;
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    public KafkaProducer(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void writeMessage(NotificationMessagingDto msg){
-        this.kafkaTemplate.send(topicName,msg);
+    public void writeMessage(InterviewDto msg){
+        this.kafkaTemplate.send(topicInterviewCreation,msg);
+    }
+    public void writeMessage(TechnicalAdvisorInterviewDto msg){
+        this.kafkaTemplate.send(topicAdvisorInterview,msg);
     }
 }

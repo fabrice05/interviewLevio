@@ -1,4 +1,4 @@
-package ca.levio.interview.db.entities;
+package ca.levio.interview.db.entities.Enum;
 
 public enum ELevelOfExpertise {
 	 JUNIOR
@@ -6,6 +6,5 @@ public enum ELevelOfExpertise {
     ,SENIOR
     ,SENIOR_PLUS
     ,EMERITE
-
 }
-    
+

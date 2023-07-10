@@ -1,7 +1,8 @@
 package ca.levio.interview.controllers;
 
-import ca.levio.interview.db.entities.ELevelOfExpertise;
-import ca.levio.interview.db.entities.ViewTechnicalAdvisorAndSkill;
+import ca.levio.interview.db.entities.Enum.ELevelOfExpertise;
+import ca.levio.interview.db.entities.ViewTechnicalAdvisorAndSkillInterview;
+import ca.levio.interview.dtos.InterviewDto;
 import ca.levio.interview.dtos.NotificationMessagingDto;
 
 import ca.levio.interview.messages.IMessageProducer;
@@ -25,32 +26,17 @@ public class TestController {
         this.mail = mail;
     }
     @PostMapping("/api/publish")
-    public void writeMessage(@RequestBody NotificationMessagingDto notification){
+    public void writeMessage(@RequestBody InterviewDto notification){
         this.producer.writeMessage(notification);
     }
 
-    @PostMapping("/api/message")
-    public String sendMessage(@RequestBody NotificationMessagingDto notification){
-
-        mail.sendEmail(notification.getMessage(),new String("fabrice.ngadjeu@gmail.com"),null,"Ceci est un test de Message");
-       return "Processus d'envoie de Message en Cours...";
-    }
-
-    @GetMapping("/api/all")
-    public String sendMessage(){
-        for (ViewTechnicalAdvisorAndSkill technicalAdvisorAndSkill : checking.getAll()) {
-            System.out.println(technicalAdvisorAndSkill);
-        }
-
-        return "Processus d'envoie de Message en Cours...";
-    }
 
     @GetMapping("/api/same")
     public String TechnicalSame(){
-        for (ViewTechnicalAdvisorAndSkill technicalAdvisorAndSkill : checking.getSameTechnicalWithHigthLevel("Développeur Java", ELevelOfExpertise.JUNIOR)) {
+      /*  for (ViewTechnicalAdvisorAndSkillInterview technicalAdvisorAndSkill : checking.getSameTechnicalWithHigthLevel("Développeur Java", ELevelOfExpertise.JUNIOR)) {
             System.out.println(technicalAdvisorAndSkill);
         }
-
+    */
         return "Processus d'envoie de Message en Cours...";
     }
 }

@@ -1,6 +1,7 @@
 package ca.levio.interview.db.entities;
 
 
+import ca.levio.interview.db.entities.Enum.ELevelOfExpertise;
 import jakarta.persistence.*;
 
 import java.util.UUID;

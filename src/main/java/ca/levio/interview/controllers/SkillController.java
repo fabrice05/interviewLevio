@@ -1,7 +1,7 @@
 package ca.levio.interview.controllers;
 
 import ca.levio.interview.dtos.SkillDto;
-import ca.levio.interview.services.Impl.SkillService;
+import ca.levio.interview.services.Impl.Dto.SkillService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

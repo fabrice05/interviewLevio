@@ -1,8 +1,7 @@
 package ca.levio.interview.controllers;
 
 import ca.levio.interview.dtos.InterviewDto;
-import ca.levio.interview.services.Impl.InterviewService;
-import ca.levio.interview.services.Impl.JobPositionService;
+import ca.levio.interview.services.Impl.Dto.InterviewService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

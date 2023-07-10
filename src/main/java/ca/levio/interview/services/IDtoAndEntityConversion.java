@@ -10,8 +10,6 @@ public interface IDtoAndEntityConversion {
    public IDtoAndEntityConversion MAPPER = Mappers.getMapper(IDtoAndEntityConversion.class);
   Interview mapDTOtoEntity(InterviewDto dto);
     InterviewDto mapEntitytoDTO(Interview Entity);
-
-
     TechnicalAdvisorInterview mapDTOtoEntity(TechnicalAdvisorInterviewDto dto);
     TechnicalAdvisorInterviewDto mapEntitytoDTO(TechnicalAdvisorInterview Entity);
 

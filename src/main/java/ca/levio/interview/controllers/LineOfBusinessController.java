@@ -1,7 +1,7 @@
 package ca.levio.interview.controllers;
 
 import ca.levio.interview.dtos.LineOfBusinessDto;
-import ca.levio.interview.services.Impl.LineOfBusinessService;
+import ca.levio.interview.services.Impl.Dto.LineOfBusinessService;
 import org.springframework.web.bind.annotation.*;
 
 

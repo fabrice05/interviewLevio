@@ -1,6 +1,9 @@
 package ca.levio.interview.db.entities;
 
 
+import ca.levio.interview.db.entities.Enum.ELevelOfExpertise;
+import ca.levio.interview.db.entities.Enum.InterviewStatus;
+import ca.levio.interview.db.entities.Enum.InterviewType;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,19 +20,19 @@ public class Interview {
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 
-    @Column(name = "interview_type", length = 10) //Interne or Externe
-    private String interviewType;
+    @Column(name = "interview_type") //Interne or Externe
+    private InterviewType interviewType;
     @Column(name = "urgent")
     private boolean urgent;
 
-    @Column(name = "interview_status", nullable = false, length = 20)
-    private String interviewStatus;
+    @Column(name = "interview_status")  // OPEN   //CLOSE
+    private InterviewStatus interviewStatus;
 
 //  Candidate Information
     @Column(name = "candidate_full_name", nullable = false, length = 200)
     private String candidateName;
-    @Column(name = "job_position_candidate", length = 100)
-    private String jobPosition;
+    @Column(name = "job_position_candidate")
+    private UUID jobPositionCandidateId;
 
     @Column(name = "level_of_expertise_candidate",nullable = false)
     private ELevelOfExpertise levelOfExpertiseCandidate;
@@ -61,14 +64,6 @@ public class Interview {
         this.description = description;
     }
 
-    public String getInterviewType() {
-        return interviewType;
-    }
-
-    public void setInterviewType(String interviewType) {
-        this.interviewType = interviewType;
-    }
-
     public boolean isUrgent() {
         return urgent;
     }
@@ -93,11 +88,19 @@ public class Interview {
         this.id = id;
     }
 
-    public String getInterviewStatus() {
+    public InterviewType getInterviewType() {
+        return interviewType;
+    }
+
+    public void setInterviewType(InterviewType interviewType) {
+        this.interviewType = interviewType;
+    }
+
+    public InterviewStatus getInterviewStatus() {
         return interviewStatus;
     }
 
-    public void setInterviewStatus(String interviewStatus) {
+    public void setInterviewStatus(InterviewStatus interviewStatus) {
         this.interviewStatus = interviewStatus;
     }
 
@@ -108,16 +111,6 @@ public class Interview {
     public void setCandidateName(String candidateName) {
         this.candidateName = candidateName;
     }
-
-    public String getJobPosition() {
-        return jobPosition;
-    }
-
-    public void setJobPosition(String jobPosition) {
-        this.jobPosition = jobPosition;
-    }
-
-
     public String getRecruiterName() {
         return recruiterName;
     }
@@ -134,6 +127,14 @@ public class Interview {
         this.recruiterEmail = recruiterEmail;
     }
 
+    public UUID getJobPositionCandidateId() {
+        return jobPositionCandidateId;
+    }
+
+    public void setJobPositionCandidateId(UUID jobPositionCandidateId) {
+        this.jobPositionCandidateId = jobPositionCandidateId;
+    }
+
     @Override
     public String toString() {
         return "Interview{" +
@@ -143,7 +144,7 @@ public class Interview {
                 ", urgent=" + urgent +
                 ", interviewStatus='" + interviewStatus + '\'' +
                 ", candidateName='" + candidateName + '\'' +
-                ", jobPosition='" + jobPosition + '\'' +
+                ", jobPosition='" + jobPositionCandidateId + '\'' +
                 ", levelOfExpertise=" + levelOfExpertiseCandidate +
                 ", recruiterName='" + recruiterName + '\'' +
                 ", recruiterEmail='" + recruiterEmail + '\'' +

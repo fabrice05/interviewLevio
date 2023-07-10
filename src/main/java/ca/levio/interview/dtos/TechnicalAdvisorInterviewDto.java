@@ -1,12 +1,14 @@
 package ca.levio.interview.dtos;
 
 
+import ca.levio.interview.db.entities.Enum.TechnicalInterviewStatus;
+
 import java.sql.Date;
 import java.util.UUID;
 
 public class TechnicalAdvisorInterviewDto {
     private UUID id;
-    private String status;
+    private TechnicalInterviewStatus status;
     private Date createdAt;
     private Date updatedAt;
     private boolean firstChoiceTechnical;
@@ -23,11 +25,11 @@ public class TechnicalAdvisorInterviewDto {
         this.id = id;
     }
 
-    public String getStatus() {
+    public TechnicalInterviewStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TechnicalInterviewStatus status) {
         this.status = status;
     }
 
@@ -69,5 +71,18 @@ public class TechnicalAdvisorInterviewDto {
 
     public void setInterviewId(UUID interviewId) {
         this.interviewId = interviewId;
+    }
+
+    @Override
+    public String toString() {
+        return "TechnicalAdvisorInterviewDto{" +
+                "id=" + id +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", firstChoiceTechnical=" + firstChoiceTechnical +
+                ", technicalAdvisorId=" + technicalAdvisorId +
+                ", interviewId=" + interviewId +
+                '}';
     }
 }
